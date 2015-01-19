@@ -1,0 +1,17 @@
+[user]
+	name=Johnnei
+	email=johnnei07@live.nl
+[alias]
+	c = commit
+	ca = commit -a
+	cb = checkout -b
+	unstage = reset HEAD --
+	restore = checkout --
+	st = status -s -b
+	lg = log --pretty=format:"%C(yellow)%h\\ %Cgreen%cn\\ %C(white)%s"
+[push]
+	default = simple
+[merge]
+	tool = tortoisemerge
+[mergetool "tortoisemerge"]
+	cmd = "\"C:\\Program Files\\TortoiseGit\\bin\\TortoiseGitMerge.exe\" -base \"$BASE\" -theirs \"$REMOTE\" -mine \"$LOCAL\" -merged \"$MERGED\""
