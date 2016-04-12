@@ -1,9 +1,10 @@
 [user]
 	name=Johnnei
 	email=johnnei07@live.nl
+	signingkey = 120A2CBD
 [alias]
-	c = commit
-	ca = commit -a
+	c = commit -S
+	ca = commit -aS
 	cb = checkout -b
 	unstage = reset HEAD --
 	restore = checkout --
@@ -12,6 +13,8 @@
 [push]
 	default = simple
 [merge]
-	tool = tortoisemerge
+	tool = p4merge
 [mergetool "tortoisemerge"]
 	cmd = "\"C:\\Program Files\\TortoiseGit\\bin\\TortoiseGitMerge.exe\" -base \"$BASE\" -theirs \"$REMOTE\" -mine \"$LOCAL\" -merged \"$MERGED\""
+[mergetool "p4merge"]
+	cmd = "\"D:\\Software\\P4Merge\\p4merge.exe\" $BASE $LOCAL $REMOTE $MERGED"
