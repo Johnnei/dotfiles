@@ -2,6 +2,9 @@
 	name=Johnnei
 	email=johnnei07@live.nl
 	signingkey = 120A2CBD
+
+# Shortcuts
+
 [alias]
 	c = commit -S
 	ca = commit -aS
@@ -10,10 +13,21 @@
 	restore = checkout --
 	st = status -s -b
 	lg = log --graph --abbrev-commit --decorate --date=short --format=format:'%C(yellow)%h %C(green)%cd %C(white)%s%C(reset) - %C(bold blue)%cn%C(dim white)%d%C(reset)'
-[push]
-	default = simple
+
+# GIT Defaults
+
 [merge]
 	tool = p4merge
+	ff = false
+[push]
+	default = simple
+[pull]
+        ff = only
+[core]
+	eol = lf
+
+# Mergetool configuration
+
 [mergetool "tortoisemerge"]
 	cmd = "\"C:\\Program Files\\TortoiseGit\\bin\\TortoiseGitMerge.exe\" -base \"$BASE\" -theirs \"$REMOTE\" -mine \"$LOCAL\" -merged \"$MERGED\""
 [mergetool "p4merge"]
