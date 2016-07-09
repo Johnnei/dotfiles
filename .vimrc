@@ -2,6 +2,7 @@ set tabstop=4
 set shiftwidth=4
 set noexpandtab
 set number
+set list lcs=tab:»·,trail:·
 
 " Configure Explorer
 let g:netrw_liststyle=3
