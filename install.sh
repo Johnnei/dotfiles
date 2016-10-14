@@ -1,3 +1,5 @@
+#!/bin/bash
+
 cp .gitconfig ~/.gitconfig
 cp .vrapperrc ~/.vrapperrc
 cp .profile ~/.profile
