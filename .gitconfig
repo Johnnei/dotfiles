@@ -25,6 +25,8 @@
 	ff = only
 [core]
 	eol = lf
+[diff]
+	wsErrorHightlight = new,old
 
 # Mergetool configuration
 
@@ -32,3 +34,10 @@
 	cmd = "\"C:\\Program Files\\TortoiseGit\\bin\\TortoiseGitMerge.exe\" -base \"$BASE\" -theirs \"$REMOTE\" -mine \"$LOCAL\" -merged \"$MERGED\""
 [mergetool "p4merge"]
 	cmd = "\"D:\\Software\\P4Merge\\p4merge.exe\" $BASE $LOCAL $REMOTE $MERGED"
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[commit]
+	gpgsign = true
