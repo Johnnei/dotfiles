@@ -1,7 +1,9 @@
 #!/bin/bash
 
-cp .gitconfig ~/.gitconfig
-cp .vrapperrc ~/.vrapperrc
-cp .profile ~/.profile
-cp .vimrc ~/.vimrc
-cp -r path-utils ~/path-utils
+cp -i .gitconfig ~/.gitconfig
+cp -i .profile ~/.profile
+cp -i .vimrc ~/.vimrc
+cp -ir path-utils ~/path-utils
+
+# Install IntelliJ Templates
+cp -iR intellij/* ~/.IntelliJIdea2017.2
