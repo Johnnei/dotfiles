@@ -5,4 +5,32 @@
       <option name="JAVA_DECLARATION" value="true" />
     </context>
   </template>
+  <template name="bp" value="public Builder with$name$($type$ $field$) {&#10;    this.$field$ = $field$;&#10;    return this;&#10;}" description="Builder Pattern Method" toReformat="false" toShortenFQNames="true">
+    <variable name="name" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="type" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="field" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_DECLARATION" value="true" />
+    </context>
+  </template>
+  <template name="bpb" value="public $TYPE$ build() {&#10;    $END$&#10;    return new $TYPE$(this);&#10;}" description="Builder Pattern Build" toReformat="false" toShortenFQNames="true">
+    <variable name="TYPE" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_DECLARATION" value="true" />
+    </context>
+  </template>
+  <template name="gopt" value="public Optional&lt;$TYPE$&gt; get$NAME$() {&#10;    return Optional.of($NAME$);&#10;}" description="Getter returning Optional" toReformat="false" toShortenFQNames="true">
+    <variable name="TYPE" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="NAME" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_DECLARATION" value="true" />
+    </context>
+  </template>
+  <template name="gnopt" value="public Optional&lt;$TYPE$&gt; get$NAME$() {&#10;    return Optional.ofNullable($NAME$);&#10;}" description="Getter returning nullable Optional" toReformat="false" toShortenFQNames="true">
+    <variable name="TYPE" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="NAME" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_DECLARATION" value="true" />
+    </context>
+  </template>
 </templateSet>
