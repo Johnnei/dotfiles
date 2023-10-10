@@ -1,7 +1,7 @@
 [user]
 	name=Johnnei
-	email=johnnei07@live.nl
-	signingkey = 120A2CBD
+	email=jtiesinga@gmail.com
+	signingkey = 693D043A51AE8FBE
 
 # Shortcuts
 
@@ -17,7 +17,6 @@
 # GIT Defaults
 
 [merge]
-	tool = p4merge
 	ff = false
 [push]
 	default = simple
@@ -25,19 +24,16 @@
 	ff = only
 [core]
 	eol = lf
+	excludesfile = /home/johnnei/.gitignore
 [diff]
 	wsErrorHightlight = new,old
 
 # Mergetool configuration
 
-[mergetool "tortoisemerge"]
-	cmd = "\"C:\\Program Files\\TortoiseGit\\bin\\TortoiseGitMerge.exe\" -base \"$BASE\" -theirs \"$REMOTE\" -mine \"$LOCAL\" -merged \"$MERGED\""
-[mergetool "p4merge"]
-	cmd = "\"D:\\Software\\P4Merge\\p4merge.exe\" $BASE $LOCAL $REMOTE $MERGED"
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
-[commit]
-	gpgsign = true
+[init]
+	defaultBranch = develop
