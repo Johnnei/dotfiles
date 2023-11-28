@@ -21,6 +21,11 @@ set.softtabstop = 2
 set.tabstop = 2
 set.shiftwidth = 2
 set.number = true
+set.expandtab = false
+set.listchars = {
+	tab = "»·",
+	trail = "·",
+}
 
 -- Global mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
