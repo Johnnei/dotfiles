@@ -71,17 +71,28 @@ return {
 	{
 		"nvim-treesitter/nvim-treesitter",
 		opts = {
+			highlight = {
+				enabled = true,
+			},
 			ensure_installed = {
 				"lua",
 				"rust",
+				"ron",
+				"toml",
+				"scala",
+				"haskell",
 			},
 		},
+		config = function(self, opts)
+			require("nvim-treesitter.configs").setup(opts)
+		end
 	},
 	{
 		"scalameta/nvim-metals",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 		},
+		lazy = true,
 		build = ":MetalsInstall",
 		config = function(self, metals_config)
 			require("metals").initialize_or_attach(metals_config)
