@@ -23,6 +23,10 @@ return {
 			---@type lspconfig.options
 			servers = {
 				lua_ls = {},
+				rust_analyzer = {},
+				hls = {
+					mason = false,
+				},
 			},
 			---@type table<string, fun(server:string, opts:_.lspconfig.options):boolean?>
       setup = {
@@ -49,9 +53,9 @@ return {
 				require("lspconfig")[server].setup(server_opts)
 			end
 
-			for server, _ in pairs(servers) do
+			for server, server_opts in pairs(servers) do
 				-- server cannot be installed by mason-lspconfig, install directly
-				if not vim.tbl_contains(all_mslp_servers, server) then
+				if server_opts.mason == false or not vim.tbl_contains(all_mslp_servers, server) then
 					setup(server)
 				else
 					ensure_installed[#ensure_installed + 1] = server
