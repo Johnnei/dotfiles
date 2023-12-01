@@ -27,6 +27,8 @@ return {
 				hls = {
 					mason = false,
 				},
+				jsonls = {},
+				postgres_lsp = {},
 			},
 			---@type table<string, fun(server:string, opts:_.lspconfig.options):boolean?>
       setup = {
