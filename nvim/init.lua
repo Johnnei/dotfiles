@@ -16,6 +16,8 @@ vim.g.mapleader = " " -- Make sure to set `mapleader` before lazy so your mappin
 
 require("lazy").setup("plugins")
 
+vim.cmd.colorscheme "catppuccin"
+
 local set = vim.opt
 set.softtabstop = 2
 set.tabstop = 2
