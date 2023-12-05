@@ -12,6 +12,7 @@ return {
 					enabled = true,
 				},
 				treesitter = true,
+				neotree = true,
 			},
 		}
 	},
