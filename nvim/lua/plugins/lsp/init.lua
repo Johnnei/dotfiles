@@ -1,5 +1,6 @@
 return {
 	{
+		  -- Build tool management
 			"williamboman/mason.nvim",
 			build = ":MasonUpdate",
 			opts = {
@@ -12,6 +13,7 @@ return {
 			end
 	},
 	{
+		-- Language Server Protocol integration
 		"neovim/nvim-lspconfig",
 		dependencies = {
 			"williamboman/mason.nvim",
@@ -71,6 +73,7 @@ return {
 		end
 	},
 	{
+		-- AST based highlghting
 		"nvim-treesitter/nvim-treesitter",
 		opts = {
 			highlight = {
@@ -93,6 +96,14 @@ return {
 		end
 	},
 	{
+		-- Add scope of the current line to top of window
+		"nvim-treesitter/nvim-treesitter-context",
+		opts = {
+			max_lines = 3,
+		},
+	},
+	{
+		-- Scala integration (lazy because it triggers everywhere causing annoying popups on missing build configs)
 		"scalameta/nvim-metals",
 		dependencies = {
 			"nvim-lua/plenary.nvim",

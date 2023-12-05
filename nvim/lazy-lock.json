@@ -6,5 +6,6 @@
   "nvim-lspconfig": { "branch": "master", "commit": "39546f730bdff8eccf7cec344cfce694f19ac908" },
   "nvim-metals": { "branch": "main", "commit": "826b7542b8bccf9a120d1c613481fb0496f93724" },
   "nvim-treesitter": { "branch": "master", "commit": "582a92ee120532a603b75239f40cba06b9a5ec07" },
+  "nvim-treesitter-context": { "branch": "master", "commit": "bf4d15ee4e96ff5201f16a4ed14443670662eb90" },
   "plenary.nvim": { "branch": "master", "commit": "366b0837486f60ae0e7550c15de8ff66d057c4cd" }
 }
