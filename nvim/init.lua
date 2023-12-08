@@ -67,3 +67,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end, opts)
   end,
 })
+
+vim.api.nvim_set_keymap('i', 'jk', '<ESC>', {noremap = true}) -- to exit to normal mode
+vim.api.nvim_set_keymap('i', '<C-g>', '<ESC>', {noremap = true}) -- <C-g> to exit to normal mode
+vim.api.nvim_set_keymap('x', '<C-g>', '<ESC>', {noremap = true}) -- <C-g> to clear visual select
