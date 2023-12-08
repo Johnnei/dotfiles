@@ -1,3 +1,5 @@
+local Util = require("lazyvim.util")
+
 return {
 	-- Add File explorer
 	{
@@ -10,6 +12,13 @@ return {
 		},
 		cmd = "Neotree",
 		keys = {
+			{
+				"<leader>fe",
+				function()
+					require("neo-tree.command").execute({ toggle = true, dir = Util.root.get() })
+				end,
+				desc = "Explorer NeoTree (root)",
+			},
 			{
 				"<leader>fE",
 				function()
