@@ -36,7 +36,12 @@ return {
 			"nvim-lua/plenary.nvim",
 		},
 		keys = {
-			--			{ "<leader>ff", require("telescope.builtin")["files"]({}),                  desc = "Find Files (root dir)" },
+			{ "<leader>ff", Util.telescope("files"), desc = "Find Files (root dir)" },
+      { "<leader>:", "<cmd>Telescope command_history<cr>", desc = "Command History" },
+      { "<leader><space>", Util.telescope("files"), desc = "Find Files (root dir)" },
+			{ "<leader>fF", Util.telescope("files", { cwd = false }), desc = "Find Files (cwd)" },
+			{ "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent" },
+			{ "<leader>/", Util.telescope("live_grep"), desc = "Grep (root dir)" },
 		}
 	}
 }

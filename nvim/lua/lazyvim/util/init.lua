@@ -3,6 +3,7 @@ local LazyUtil = require("lazy.core.util")
 ---@class lazyvim.util: LazyUtilCore
 ---@field lsp lazyvim.util.lsp
 ---@field root lazyvim.util.root
+---@field telescope lazyvim.util.telescope
 local M = {}
 
 

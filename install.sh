@@ -23,3 +23,12 @@ DOT_PROFILE_PATH=$PWD/.profile
 
 echo "Adding $DOT_PROFILE_PATH to $SHELL_PROFILE"
 grep -qxF "source $DOT_PROFILE_PATH" "$SHELL_PROFILE" || echo "source $DOT_PROFILE_PATH" >> $SHELL_PROFILE
+
+# Installing Tooling
+if [[ uname -o -eq "Darwin" ]]; then
+	brew tap homebrew/cask-fonts
+	brew install --cask font-jetbrains-mono-nerd-font
+	brew install ripgrep
+else
+	sudo pacman -S --needed ttf-jetbrains-mono-nerd ripgrep
+fi
