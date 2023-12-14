@@ -108,7 +108,11 @@ return {
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 		},
-		lazy = true,
+		ft = {
+			"scala",
+			"sbt",
+			"java",
+		},
 		build = ":MetalsInstall",
 		config = function(self, metals_config)
 			require("metals").initialize_or_attach(metals_config)
