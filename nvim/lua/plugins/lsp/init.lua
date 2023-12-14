@@ -1,16 +1,16 @@
 return {
 	{
-		  -- Build tool management
-			"williamboman/mason.nvim",
-			build = ":MasonUpdate",
-			opts = {
-				ensure_installed = {
-					"stylua",
-				},
+		-- Build tool management
+		"williamboman/mason.nvim",
+		build = ":MasonUpdate",
+		opts = {
+			ensure_installed = {
+				"stylua",
 			},
-			config = function(_, opts)
-				require("mason").setup(opts)
-			end
+		},
+		config = function(_, opts)
+			require("mason").setup(opts)
+		end
 	},
 	{
 		-- Language Server Protocol integration
@@ -33,7 +33,7 @@ return {
 				postgres_lsp = {},
 			},
 			---@type table<string, fun(server:string, opts:_.lspconfig.options):boolean?>
-      setup = {
+			setup = {
 			},
 		},
 		config = function(self, opts)
@@ -114,6 +114,17 @@ return {
 			"java",
 		},
 		build = ":MetalsInstall",
+		opts = function()
+			local metals_config = require("metals").bare_config()
+
+			-- Example of settings
+			metals_config.settings = {
+				showImplicitArguments = true,
+				excludedPackages = { "akka.actor.typed.javadsl", "com.github.swagger.akka.javadsl" },
+			}
+
+			return metals_config
+		end,
 		config = function(self, metals_config)
 			require("metals").initialize_or_attach(metals_config)
 		end
