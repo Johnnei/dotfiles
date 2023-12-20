@@ -27,6 +27,12 @@ return {
 				desc = "Explorer NeoTree (cwd)",
 			}
 		},
+		opts = {
+			filesystem = {
+				group_empty_dirs = true,
+				scan_mode = "deep",
+			},
+		},
 	},
 	-- Add file search
 	{
