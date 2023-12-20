@@ -13,6 +13,12 @@ return {
 		end
 	},
 	{
+		-- Yaml Schema Store
+		"b0o/SchemaStore.nvim",
+		lazy = true,
+		version = false, -- last release is way too old
+	},
+	{
 		-- Language Server Protocol integration
 		"neovim/nvim-lspconfig",
 		dependencies = {
@@ -31,9 +37,60 @@ return {
 				},
 				jsonls = {},
 				postgres_lsp = {},
+				yamlls = {
+					capabilities = {
+						textDocument = {
+							foldingRange = {
+								dynamicRegistration = false,
+								lineFoldingOnly = true,
+							},
+						},
+					},
+						-- lazy-load schemastore when needed
+					on_new_config = function(new_config)
+						new_config.settings.yaml.schemas = vim.tbl_deep_extend(
+							"force",
+							new_config.settings.yaml.schemas or {},
+							require("schemastore").yaml.schemas {
+								extra = {
+									{
+										description = "devstack",
+										fileMatch = "devstack.yaml",
+										name = "devstack.yaml",
+										url = "https://devstack.agodadev.io/api/v1/schema/devstack-v1.json",
+									},
+								},
+							}
+						)
+					end,
+					settings = {
+						redhat = { telemetry = { enabled = false } },
+						yaml = {
+							keyOrdering = false,
+							format = {
+								enable = true,
+							},
+							validate = true,
+							schemaStore = {
+								-- Must disable built-in schemaStore support to use
+								-- schemas from SchemaStore.nvim plugin
+								enable = false,
+								-- Avoid TypeError: Cannot read properties of undefined (reading 'length')
+								url = "",
+							},
+						},
+					},
+				},
 			},
 			---@type table<string, fun(server:string, opts:_.lspconfig.options):boolean?>
 			setup = {
+					yamlls = function()
+					require("lazyvim.util").lsp.on_attach(function(client, _)
+						if client.name == "yamlls" then
+							client.server_capabilities.documentFormattingProvider = true
+						end
+					end)
+			end,
 			},
 		},
 		config = function(self, opts)
@@ -89,6 +146,7 @@ return {
 				"toml",
 				"scala",
 				"haskell",
+				"yaml"
 			},
 		},
 		config = function(self, opts)
