@@ -29,6 +29,7 @@ if [[ uname -o -eq "Darwin" ]]; then
 	brew tap homebrew/cask-fonts
 	brew install --cask font-jetbrains-mono-nerd-font
 	brew install ripgrep
+	brew install cargo-nextest
 else
-	sudo pacman -S --needed ttf-jetbrains-mono-nerd ripgrep
+	sudo pacman -S --needed ttf-jetbrains-mono-nerd ripgrep cargo-nextest
 fi

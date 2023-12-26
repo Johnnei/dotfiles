@@ -111,19 +111,29 @@ return {
 					vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
 
 					-- Buffer local mappings
+					local telescope = require('telescope.builtin')
 					local opts = { buffer = ev.buf }
+					vim.keymap.set('n', 'gd', telescope.lsp_definitions, opts)
 					vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
-					vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
 					vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
-					vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
+					vim.keymap.set('n', 'gi', telescope.lsp_implementations, opts)
 					vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
-					vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, opts)
-					vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
-					vim.keymap.set({ 'n', 'v' }, '<space>ca', vim.lsp.buf.code_action, opts)
-					vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
-					vim.keymap.set('n', '<space>f', function()
+					vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, opts)
+					vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
+					vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, opts)
+					vim.keymap.set('n', 'gr', telescope.lsp_references, opts)
+					vim.keymap.set('n', '<leader>f', function()
 						vim.lsp.buf.format { async = true }
 					end, opts)
+
+					vim.keymap.set('n', '<leader>tt', function() require("neotest").run.run(vim.fn.expand("%")) end, { desc = "Run tests in file" })
+					vim.keymap.set('n', '<leader>tT', function() require("neotest").run.run(vim.loop.cwd()) end, { desc = "Run tests in directory" })
+					vim.keymap.set('n', '<leader>tr', function() require("neotest").run.run() end, { desc = "Run nearest test" })
+					vim.keymap.set('n', '<leader>ts', function() require("neotest").summary.toggle() end, { desc = "Toggle summary" })
+					vim.keymap.set('n', '<leader>to', function() require("neotest").output.open({ enter = true, autoclose = true}) end, { desc = "Show output" })
+					vim.keymap.set('n', '<leader>tO', function() require("neotest").output_panel.toggle() end, { desc = "Show output panel" })
+					vim.keymap.set('n', '<leader>tS', function() require("neotest").summary.toggle() end, { desc = "Stop test run" })
+
 				end,
 			})
 
@@ -210,6 +220,21 @@ return {
 		end,
 		config = function(self, metals_config)
 			require("metals").initialize_or_attach(metals_config)
+		end
+	},
+	-- Running Tests from VIM integration
+	{
+		"nvim-neotest/neotest",
+		lazy = true,
+		dependencies = {
+			"rouge8/neotest-rust",
+		},
+		config = function (_, opts)
+			require("neotest").setup({
+				adapters = {
+					require("neotest-rust")
+				},
+			})
 		end
 	},
 }
