@@ -80,4 +80,10 @@ return {
 			require("cmp").setup(opts)
 		end,
 	},
+	-- Add quick comment key mappings
+	{
+		"echasnovski/mini.comment",
+		event = "VeryLazy",
+		opts = {},
+	},
 }
