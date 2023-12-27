@@ -84,6 +84,14 @@ return {
 	{
 		"echasnovski/mini.comment",
 		event = "VeryLazy",
+		version = false,
+		opts = {},
+	},
+	-- Insert matching surrounding tokens
+	{
+		"echasnovski/mini.pairs",
+		event = "VeryLazy",
+		version = false,
 		opts = {},
 	},
 }
