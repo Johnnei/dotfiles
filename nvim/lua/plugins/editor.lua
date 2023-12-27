@@ -28,9 +28,14 @@ return {
 			}
 		},
 		opts = {
+			sources = { "filesystem", "buffers", "git_status", "document_symbols" },
+			open_files_do_not_replace_types = { "terminal", "Trouble", "trouble", "qf", "Outline" },
 			filesystem = {
 				group_empty_dirs = true,
 				scan_mode = "deep",
+				follow_current_file = {
+					enabled = true,
+				},
 			},
 		},
 	},
@@ -106,5 +111,25 @@ return {
 				map("n", "<leader>ghb", function() gs.blame_line({ full = true }) end, "Blame Line")
 			end,
 		},
+	},
+	-- Highlight matching symbols under cursor
+	{
+		"RRethy/vim-illuminate",
+		event = "LazyFile",
+		opts = {
+			delay = 200,
+			large_file_cutoff = 2000,
+			large_file_overrides = {
+				prodivders = { "lsp" },
+			},
+		},
+		config = function (_, opts)
+			require("illuminate").configure(opts)
+		end,
+	},
+	-- Better Buffer Close behaviour
+	{
+		'echasnovski/mini.bufremove',
+		version = false
 	},
 }
