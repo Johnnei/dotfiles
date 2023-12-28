@@ -19,12 +19,14 @@ require("lazy").setup("plugins")
 
 vim.cmd.colorscheme "catppuccin"
 
-local set = vim.opt
-set.softtabstop = 2
-set.tabstop = 2
-set.shiftwidth = 2
-set.number = true
-set.expandtab = false
+local opt = vim.opt
+opt.softtabstop = 2
+opt.tabstop = 2
+opt.shiftwidth = 2
+opt.number = true
+opt.expandtab = false
+-- Force lines above/below the cursor
+opt.scrolloff = 4
 vim.opt.listchars = {
 	tab = '»·',
 	trail = '·',
