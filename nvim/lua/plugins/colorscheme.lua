@@ -7,6 +7,8 @@ return {
 			flavour = "mocha",
 			integrations = {
 				cmp = true,
+				gitsigns = true,
+				illuminate = true,
 				mason = true,
 				markdown = true,
 				native_lsp = {
@@ -16,6 +18,7 @@ return {
 				treesitter = true,
 				neotest = true,
 				neotree = true,
+				noice = true,
 				which_key = true,
 			},
 		}
