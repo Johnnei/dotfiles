@@ -29,6 +29,14 @@ return {
 		},
 		opts = {
 			sources = { "filesystem", "buffers", "git_status", "document_symbols" },
+			source_selector = {
+				sources = {
+					{ source = "filesystem" },
+					{ source = "document_symbols" },
+					{ source = "buffers" },
+					{ source = "git_status" },
+				},
+			},
 			open_files_do_not_replace_types = { "terminal", "Trouble", "trouble", "qf", "Outline" },
 			filesystem = {
 				group_empty_dirs = true,

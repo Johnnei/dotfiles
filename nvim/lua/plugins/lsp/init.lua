@@ -181,7 +181,9 @@ return {
 				"toml",
 				"scala",
 				"haskell",
-				"yaml"
+				"yaml",
+				"vim",
+				"vimdoc",
 			},
 		},
 		config = function(self, opts)
