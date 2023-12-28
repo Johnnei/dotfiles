@@ -38,9 +38,20 @@ return {
 				},
 			},
 			open_files_do_not_replace_types = { "terminal", "Trouble", "trouble", "qf", "Outline" },
+			document_symbols = {
+				follow_cursor = true,
+			},
 			filesystem = {
 				group_empty_dirs = true,
 				scan_mode = "deep",
+				filtered_items = {
+					always_show = {
+						".gitignore"
+					},
+					never_show = {
+						".DS_Store"
+					},
+				},
 				follow_current_file = {
 					enabled = true,
 					leave_dirs_open = true,
