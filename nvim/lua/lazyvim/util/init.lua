@@ -5,6 +5,8 @@ local LazyUtil = require("lazy.core.util")
 ---@field root lazyvim.util.root
 ---@field telescope lazyvim.util.telescope
 ---@field plugin lazyvim.util.plugin
+---@field lualine lazyvim.util.lualine
+---@field ui lazyvim.util.ui
 local M = {}
 
 setmetatable(M, {

@@ -18,12 +18,18 @@ return {
 		lazy = true,
 		version = false, -- last release is way too old
 	},
+	-- Improve Neovim DevX
+	{
+		"folke/neodev.nvim",
+		opts = {},
+	},
 	{
 		-- Language Server Protocol integration
 		"neovim/nvim-lspconfig",
 		dependencies = {
 			"williamboman/mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
+			"folke/neodev.nvim",
 		},
 		---@class PluginLspOpts
 		opts = {
@@ -119,7 +125,7 @@ return {
 					vim.keymap.set('n', 'gi', telescope.lsp_implementations, opts)
 					vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
 					vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, opts)
-					vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
+					vim.keymap.set('n', '<leader>cr', vim.lsp.buf.rename, opts)
 					vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, opts)
 					vim.keymap.set('n', 'gr', telescope.lsp_references, opts)
 					vim.keymap.set('n', '<leader>f', function()
@@ -184,6 +190,12 @@ return {
 				"yaml",
 				"vim",
 				"vimdoc",
+				"regex",
+				"bash",
+				"markdown",
+				"markdown_inline",
+				"json",
+				"hocon"
 			},
 		},
 		config = function(self, opts)
