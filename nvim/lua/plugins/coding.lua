@@ -8,13 +8,44 @@ return {
 	},
 	-- Rust Crates Support
 	{
-	"Saecki/crates.nvim",
+		"Saecki/crates.nvim",
 		event = { "BufRead Cargo.toml" },
 		opts = {
 			src = {
 				cmp = { enabled = true },
 			},
 		},
+	},
+	-- Github Copilot
+	{
+		"zbirenbaum/copilot.lua",
+		cmd = "Copilot",
+		build = ":Copilot auth",
+		opts = {
+			suggestions = { enabled = false },
+			panel = { enabled = false },
+			filetypes = {
+				markdown = true,
+				help = true
+			}
+		}
+	},
+	-- cmp integration for copilot
+	{
+		"zbirenbaum/copilot-cmp",
+		dependencies = "copilot.lua",
+		opts = {},
+		config = function(_, opts)
+			local copilot_cmp = require("copilot_cmp")
+			copilot_cmp.setup(opts)
+			-- attach cmp source whenever copilot attaches
+			-- fixes lazy-loading issues with the copilot cmp source
+			require("lazyvim.util").lsp.on_attach(function(client)
+				if client.name == "copilot" then
+					copilot_cmp._on_insert_enter({})
+				end
+			end)
+		end,
 	},
 	-- auto completion
 	{
@@ -27,6 +58,8 @@ return {
 			"hrsh7th/cmp-path",
 			"L3MON4D3/LuaSnip",
 			"saadparwaiz1/cmp_luasnip",
+			"Saecki/crates.nvim",
+			"zbirenbaum/copilot-cmp",
 		},
 		opts = function()
 			vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
@@ -59,6 +92,13 @@ return {
 					end,
 				}),
 				sources = cmp.config.sources(
+					{
+						{
+							name = "copilot",
+							group_index = 1,
+							priority = 100,
+						},
+					},
 					{
 						{ name = "nvim_lsp" },
 						{ name = "luasnip" },
