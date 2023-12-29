@@ -132,14 +132,6 @@ return {
 						vim.lsp.buf.format { async = true }
 					end, opts)
 
-					vim.keymap.set('n', '<leader>tt', function() require("neotest").run.run(vim.fn.expand("%")) end, { desc = "Run tests in file" })
-					vim.keymap.set('n', '<leader>tT', function() require("neotest").run.run(vim.loop.cwd()) end, { desc = "Run tests in directory" })
-					vim.keymap.set('n', '<leader>tr', function() require("neotest").run.run() end, { desc = "Run nearest test" })
-					vim.keymap.set('n', '<leader>ts', function() require("neotest").summary.toggle() end, { desc = "Toggle summary" })
-					vim.keymap.set('n', '<leader>to', function() require("neotest").output.open({ enter = true, autoclose = true}) end, { desc = "Show output" })
-					vim.keymap.set('n', '<leader>tO', function() require("neotest").output_panel.toggle() end, { desc = "Show output panel" })
-					vim.keymap.set('n', '<leader>tS', function() require("neotest").summary.toggle() end, { desc = "Stop test run" })
-
 				end,
 			})
 
@@ -234,24 +226,6 @@ return {
 		end,
 		config = function(self, metals_config)
 			require("metals").initialize_or_attach(metals_config)
-		end
-	},
-	-- Running Tests from VIM integration
-	-- Seems to crash neovim when navigating through telescope, not sure why
-	{
-		"nvim-neotest/neotest",
-		lazy = true,
-		optional = true,
-		dependencies = {
-			"rouge8/neotest-rust",
-			"nvim-treesitter/nvim-treesitter",
-		},
-		config = function (_, opts)
-			require("neotest").setup({
-				adapters = {
-					require("neotest-rust")
-				},
-			})
 		end
 	},
 }

@@ -27,6 +27,8 @@ opt.number = true
 opt.expandtab = false
 -- Force lines above/below the cursor
 opt.scrolloff = 4
+-- Save swap and trigger CursorHold
+opt.updatetime = 200
 vim.opt.listchars = {
 	tab = '»·',
 	trail = '·',

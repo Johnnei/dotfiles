@@ -1,3 +1,4 @@
+-- PLugins that improve coding experience
 return {
 	-- code snippets
 	{
@@ -149,5 +150,35 @@ return {
 		event = "VeryLazy",
 		version = false,
 		opts = {},
+	},
+	-- Running Tests from VIM integration
+	-- Causes crashes when has an active client and navigating files
+	{
+		"nvim-neotest/neotest",
+		lazy = true,
+		optional = true,
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-treesitter/nvim-treesitter",
+			"rouge8/neotest-rust",
+		},
+		config = function (_, opts)
+			require("neotest").setup({
+				adapters = {
+					require("neotest-rust")
+				},
+				status = { virtual_text = true },
+				output = { open_on_run = true },
+			})
+		end,
+		keys = {
+			{ '<leader>tt', function() require("neotest").run.run(vim.fn.expand("%")) end, desc = "Run tests in file" },
+			{ '<leader>tT', function() require("neotest").run.run(vim.loop.cwd()) end, desc = "Run tests in directory" },
+			{ '<leader>tr', function() require("neotest").run.run() end, desc = "Run nearest test" },
+			{ '<leader>ts', function() require("neotest").summary.toggle() end, desc = "Toggle summary" },
+			{ '<leader>to', function() require("neotest").output.open({ enter = true, auto_close = true}) end, desc = "Show output" },
+			{ '<leader>tO', function() require("neotest").output_panel.toggle() end, desc = "Show output panel" },
+			{ '<leader>tS', function() require("neotest").run.stop() end, desc = "Stop test run" },
+		},
 	},
 }

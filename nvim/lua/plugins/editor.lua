@@ -1,3 +1,4 @@
+-- Plugins that make it a decent text editor
 local Util = require("lazyvim.util")
 
 return {
@@ -73,7 +74,23 @@ return {
 			{ "<leader>fF", Util.telescope("files", { cwd = false }), desc = "Find Files (cwd)" },
 			{ "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent" },
 			{ "<leader>/", Util.telescope("live_grep"), desc = "Grep (root dir)" },
-		}
+		},
+		opts = function() return {
+			defaults = {
+				get_selection_window = function()
+					local wins = vim.api.nvim_list_wins()
+					print("Choosing")
+					table.insert(wins, 1, vim.api.nvim_get_current_win())
+					for _, win in ipairs(wins) do
+						local buf = vim.api.nvim_win_get_buf(win)
+						if vim.bo[buf].buftype == "" then
+							return win
+						end
+					end
+					return 0
+				end
+			}
+		} end,
 	},
 	-- key bindings help
 	{
@@ -126,6 +143,7 @@ return {
 					vim.keymap.set(mode, l, r, { buffer = buffer, desc = desc })
 				end
 
+				map({ "n", "v" }, "<leader>ghr", ":Gitsigns reset_hunk<CR>", "Reset Hunk")
 				map("n", "]h", gs.next_hunk, "Next Hunk")
 				map("n", "[h", gs.prev_hunk, "Prev Hunk")
 				map("n", "<leader>ghb", function() gs.blame_line({ full = true }) end, "Blame Line")
