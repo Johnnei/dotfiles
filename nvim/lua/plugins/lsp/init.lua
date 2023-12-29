@@ -237,11 +237,14 @@ return {
 		end
 	},
 	-- Running Tests from VIM integration
+	-- Seems to crash neovim when navigating through telescope, not sure why
 	{
 		"nvim-neotest/neotest",
 		lazy = true,
+		optional = true,
 		dependencies = {
 			"rouge8/neotest-rust",
+			"nvim-treesitter/nvim-treesitter",
 		},
 		config = function (_, opts)
 			require("neotest").setup({
