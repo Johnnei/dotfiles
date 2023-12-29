@@ -6,6 +6,16 @@ return {
 		run = "make install_jsregexp",
 		lazy = true,
 	},
+	-- Rust Crates Support
+	{
+	"Saecki/crates.nvim",
+		event = { "BufRead Cargo.toml" },
+		opts = {
+			src = {
+				cmp = { enabled = true },
+			},
+		},
+	},
 	-- auto completion
 	{
 		"hrsh7th/nvim-cmp",
@@ -48,13 +58,19 @@ return {
 						fallback()
 					end,
 				}),
-				sources = cmp.config.sources({
-					{ name = "nvim_lsp" },
-					{ name = "luasnip" },
-					{ name = "path" },
-				}, {
-					{ name = "buffer" },
-				}),
+				sources = cmp.config.sources(
+					{
+						{ name = "nvim_lsp" },
+						{ name = "luasnip" },
+						{ name = "path" },
+					},
+					{
+						{ name = "buffer" },
+					},
+					{
+						{ name = "crates" },
+					}
+				),
 				formatting = {
 					format = function(_, item)
 						local icons = require("lazyvim.config").icons.kinds
