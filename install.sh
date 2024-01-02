@@ -12,6 +12,9 @@ ln --symbolic --force --verbose $PWD/nvim/init.lua $XDG_CONFIG_HOME/nvim/init.lu
 ln --symbolic --force --verbose $PWD/nvim/lazy-lock.json $XDG_CONFIG_HOME/nvim/lazy-lock.json
 ln --symbolic --force --no-target-directory --verbose $PWD/nvim/lua $XDG_CONFIG_HOME/nvim/lua
 
+# Install IDEA Vim config
+ln --symbolic --force --verbose $PWD/.ideavimrc ~/.ideavimrc
+
 # Install generic .profile
 if [[ -e ~/.bashrc ]]; then
 	SHELL_PROFILE=~/.bashrc
