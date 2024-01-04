@@ -37,7 +37,6 @@ return {
 			---@type lspconfig.options
 			servers = {
 				lua_ls = {},
-				rust_analyzer = {},
 				hls = {
 					mason = false,
 				},
