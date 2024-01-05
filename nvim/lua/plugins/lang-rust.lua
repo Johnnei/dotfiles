@@ -1,7 +1,6 @@
 return {
 	-- Setup Rust LSP
 	{
-		-- Language Server Protocol integration
 		"neovim/nvim-lspconfig",
 		opts = {
 			servers = {
