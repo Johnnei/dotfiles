@@ -181,7 +181,6 @@ return {
 				"rust",
 				"ron",
 				"toml",
-				"scala",
 				"haskell",
 				"yaml",
 				"vim",
@@ -204,32 +203,5 @@ return {
 		opts = {
 			max_lines = 3,
 		},
-	},
-	{
-		-- Scala integration (lazy because it triggers everywhere causing annoying popups on missing build configs)
-		"scalameta/nvim-metals",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-		},
-		ft = {
-			"scala",
-			"sbt",
-			"java",
-		},
-		build = ":MetalsInstall",
-		opts = function()
-			local metals_config = require("metals").bare_config()
-
-			-- Example of settings
-			metals_config.settings = {
-				showImplicitArguments = true,
-				excludedPackages = { "akka.actor.typed.javadsl", "com.github.swagger.akka.javadsl" },
-			}
-
-			return metals_config
-		end,
-		config = function(self, metals_config)
-			require("metals").initialize_or_attach(metals_config)
-		end
 	},
 }

@@ -106,6 +106,18 @@ return {
 					lualine_x = {
 						{
 							function()
+								-- TODO: Can I route this to Noice mini instead?
+								return vim.g['metals_status'] .. vim.g['metals_bsp_status']
+							end,
+							cond = function()
+								if not package.loaded["metals"] then
+									return
+								end
+								return true
+							end,
+						},
+						{
+							function()
 								local icon = icons.kinds.Copilot
 								local status = require("copilot.api").status.data
 								return icon .. (status.message or "")
