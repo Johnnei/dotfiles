@@ -144,11 +144,4 @@ return {
 		version = false,
 		opts = {},
 	},
-	-- Insert matching surrounding tokens
-	{
-		"echasnovski/mini.pairs",
-		event = "VeryLazy",
-		version = false,
-		opts = {},
-	},
 }
