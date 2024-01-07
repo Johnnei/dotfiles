@@ -1,16 +1,19 @@
 return {
-	-- Scala integration (lazy because it triggers everywhere causing annoying popups on missing build configs)
+	-- Scala integration
 	{
 		"scalameta/nvim-metals",
 		dependencies = {
+			-- LSP Integration
 			"nvim-lua/plenary.nvim",
 			"nvim-telescope/telescope.nvim",
 			"hrsh7th/cmp-nvim-lsp",
+			-- UI Improvements
+			"folke/noice.nvim",
+			"MunifTanjim/nui.nvim",
 		},
 		ft = {
 			"scala",
 			"sbt",
-			"java",
 		},
 		build = ":MetalsInstall",
 		opts = function()
@@ -24,6 +27,20 @@ return {
 				showImplicitArguments = true,
 				excludedPackages = { "akka.actor.typed.javadsl", "com.github.swagger.akka.javadsl" },
 			}
+
+			-- Override metals/stauts to send to Noice mini
+			metals_config.handlers["metals/status"] = function(_, status)
+				local Manager = require("noice.message.manager")
+				local Message = require("noice.message")
+
+				if not status.hide then
+					local msg = Message("metals", "message", status.text)
+					msg.opts.title = "Metals"
+					msg.level = "info"
+					msg.kind = "message"
+					Manager.add(msg)
+				end
+			end
 
 			return metals_config
 		end,

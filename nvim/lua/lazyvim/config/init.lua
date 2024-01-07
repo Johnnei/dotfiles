@@ -129,9 +129,9 @@ function M.get_kind_filter(buf)
   end
   if M.kind_filter[ft] == false then
     return
-  end
+	end
   ---@diagnostic disable-next-line: return-type-mismatch
-  return type(M.kind_filter) == "table" and type(M.kind_filter.default) == "table" and M.kind_filter.default or nil
+	return M.kind_filter[ft] or M.kind_filter.default
 end
 
 setmetatable(M, {
