@@ -130,7 +130,7 @@ return {
 					vim.keymap.set('n', '<leader>f', function()
 						vim.lsp.buf.format { async = true }
 					end, opts)
-					vim.keymap.set('n', '<leader>ss', function()
+					vim.keymap.set('n', '<leader>fs', function()
 						telescope.lsp_document_symbols({
 							symbols = require("lazyvim.config").get_kind_filter()
 						})
