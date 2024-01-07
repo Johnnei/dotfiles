@@ -201,6 +201,8 @@ return {
 							{ find = "; after #%d+" },
 							{ find = "; before #%d+" },
 							{ find = "%d+ lines yanked" },
+							{ find = "%d+ lines >ed" },
+							{ find = "%d+ lines <ed" },
 							{ find = "%d+ fewer lines" },
 							{ find = "%d+ more lines" },
 						},
@@ -222,7 +224,7 @@ return {
 				return math.floor(vim.o.columns * 0.75)
 			end,
 			on_open = function(win)
-				vim.api.nvim_win_set_config(win, { zindex = 100 })
+				vim.api.nvim_win_set_config(win, { focusable = false, zindex = 100 })
 			end,
 		},
 		init = function()
