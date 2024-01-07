@@ -19,6 +19,7 @@ return {
 				neotest = true,
 				neotree = true,
 				noice = true,
+				notify = true,
 				which_key = true,
 			},
 		}

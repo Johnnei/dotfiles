@@ -127,7 +127,7 @@ return {
 					vim.keymap.set('n', '<leader>cr', vim.lsp.buf.rename, opts)
 					vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, opts)
 					vim.keymap.set('n', 'gr', telescope.lsp_references, opts)
-					vim.keymap.set('n', '<leader>f', function()
+					vim.keymap.set('n', '<leader>cf', function()
 						vim.lsp.buf.format { async = true }
 					end, opts)
 					vim.keymap.set('n', '<leader>fs', function()

@@ -67,6 +67,8 @@ return {
 			{ "<leader>fF", Util.telescope("files", { cwd = false }), desc = "Find Files (cwd)" },
 			{ "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent" },
 			{ "<leader>/", Util.telescope("live_grep"), desc = "Grep (root dir)" },
+			{ "<leader>fh", Util.telescope("help_tags"), desc = "Help" },
+			{ "<leader>fc", Util.telescope("commands"), desc = "Commands" },
 		},
 		opts = function() return {
 			defaults = {
