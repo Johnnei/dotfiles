@@ -36,7 +36,7 @@ return {
 				if not status.hide then
 					local msg = Message("metals", "message", status.text)
 					msg.opts.title = "Metals"
-					msg.level = "info"
+					msg.level = ""
 					msg.kind = "message"
 					Manager.add(msg)
 				end
