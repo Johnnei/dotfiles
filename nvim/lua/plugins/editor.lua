@@ -40,7 +40,8 @@ return {
 				scan_mode = "deep",
 				filtered_items = {
 					always_show = {
-						".gitignore"
+						".gitignore",
+						".gitlab-ci.yml",
 					},
 					never_show = {
 						".DS_Store"
