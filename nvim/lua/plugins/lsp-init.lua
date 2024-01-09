@@ -10,6 +10,16 @@ return {
 		},
 		config = function(_, opts)
 			require("mason").setup(opts)
+			local registry = require("mason-registry")
+			-- Ensure all tools are installed
+			registry.refresh(function()
+				for _, tool in ipairs(opts.ensure_installed) do
+					local pkg = registry.get_package(tool)
+					if not pkg:is_installed() then
+						pkg:install()
+					end
+				end
+			end)
 		end
 	},
 	{
@@ -148,7 +158,10 @@ return {
 				local server_opts = vim.tbl_deep_extend("force", {
 					capabilities = vim.deepcopy(capabilities),
 				}, servers[server] or {})
-				require("lspconfig")[server].setup(server_opts)
+
+				if not opts.setup[server] then
+					require("lspconfig")[server].setup(server_opts)
+				end
 			end
 
 			for server, server_opts in pairs(servers) do
@@ -169,6 +182,8 @@ return {
 	{
 		-- AST based highlghting
 		"nvim-treesitter/nvim-treesitter",
+		build = ":TSUpdate",
+		cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
 		opts = {
 			highlight = {
 				enable = true,
