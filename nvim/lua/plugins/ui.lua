@@ -204,6 +204,9 @@ return {
 					view = "mini",
 				}
 			},
+			presets = {
+				inc_rename = true
+			},
 		},
 	},
 	-- Better notifcations
@@ -225,4 +228,16 @@ return {
 			-- Rely on noice to handle notifcations
 		end,
 	},
+	-- Better input/select components
+	{
+		"stevearc/dressing.nvim",
+		opts = {},
+	},
+	-- Visual preview for lsp rename
+	{
+		"smjonas/inc-rename.nvim",
+		opts = {
+			input_buffer_type = "noice",
+		},
+	}
 }

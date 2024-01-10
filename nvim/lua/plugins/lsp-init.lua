@@ -1,3 +1,5 @@
+local Util = require("lazyvim.util")
+
 return {
 	{
 		-- Build tool management
@@ -119,35 +121,57 @@ return {
 			)
 
 			-- Wire up keymaps
-			vim.api.nvim_create_autocmd('LspAttach', {
-				group = vim.api.nvim_create_augroup('UserLspConfig', {}),
-				callback = function(ev)
-					-- Autocompletion trigger
-					vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
+			Util.lsp.on_attach(function(client, buffer)
+				local telescope = require('telescope.builtin')
 
-					-- Buffer local mappings
-					local telescope = require('telescope.builtin')
-					local opts = { buffer = ev.buf }
-					vim.keymap.set('n', 'gd', telescope.lsp_definitions, opts)
-					vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
-					vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
-					vim.keymap.set('n', 'gi', telescope.lsp_implementations, opts)
-					vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
-					vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, opts)
-					vim.keymap.set('n', '<leader>cr', vim.lsp.buf.rename, opts)
-					vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, opts)
-					vim.keymap.set('n', 'gr', telescope.lsp_references, opts)
-					vim.keymap.set('n', '<leader>cf', function()
-						vim.lsp.buf.format { async = true }
-					end, opts)
-					vim.keymap.set('n', '<leader>fs', function()
-						telescope.lsp_document_symbols({
-							symbols = require("lazyvim.config").get_kind_filter()
-						})
-					end, { desc = "Goto Symbol" })
+				local keys = {
+					{ 'gd', telescope.lsp_definitions, desc = "Goto Definition" },
+					{ 'K', vim.lsp.buf.hover, desc = "Hover" },
+					{ 'gi', telescope.lsp_implementations, desc = "Goto Implementation" },
+					{ '<C-k>', vim.lsp.buf.signature_help, desc = "Signature Help" },
+					{ '<leader>D', vim.lsp.buf.type_definition, desc = "Type Definition" },
+					{
+						'<leader>cr',
+						function()
+							return ":IncRename " .. vim.fn.expand("<cword>")
+						end,
+						desc = "Rename",
+						expr = true,
+					},
+					{ '<leader>ca', vim.lsp.buf.code_action, mode = { 'n', 'v' }, desc = "Code Action" },
+					{ 'gr', telescope.lsp_references, desc = "Goto Reference" },
+					{
+						'<leader>cf',
+						function()
+							vim.lsp.buf.format { async = true }
+						end,
+						desc = "Format",
+					},
+					{
+						'<leader>fs',
+						function()
+							telescope.lsp_document_symbols({
+								symbols = require("lazyvim.config").get_kind_filter()
+							})
+						end,
+						desc = "Goto Symbol"
+					},
+				}
 
-				end,
-			})
+				for _, keymap in ipairs(keys) do
+					local key_opts = {}
+					if keymap.desc then
+						key_opts.desc = keymap.desc
+					end
+
+					if keymap.expr then
+						key_opts.expr = keymap.expr
+					end
+					key_opts.buffer = buffer
+
+					vim.keymap.set(keymap.mode or 'n', keymap[1], keymap[2], key_opts)
+				end
+			end)
 
 			-- Connect to Mason
 			local masonlsp = require("mason-lspconfig")
