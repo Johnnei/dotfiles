@@ -28,6 +28,10 @@ return {
 				excludedPackages = { "akka.actor.typed.javadsl", "com.github.swagger.akka.javadsl" },
 			}
 
+			metals_config.on_attach = function(_, _)
+				require("metals").setup_dap()
+			end
+
 			-- Override metals/stauts to send to Noice mini
 			metals_config.handlers["metals/status"] = function(_, status)
 				local Manager = require("noice.message.manager")
@@ -44,9 +48,40 @@ return {
 
 			return metals_config
 		end,
-		config = function(_, metals_config)
-			require("metals").initialize_or_attach(metals_config)
-			require("telescope").load_extension("metals")
-		end
+    config = function(self, metals_config)
+			local nvim_metals_group = vim.api.nvim_create_augroup("nvim-metals", { clear = true })
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = self.ft,
+				callback = function()
+					require("metals").initialize_or_attach(metals_config)
+				end,
+				group = nvim_metals_group,
+			})
+    end
+	},
+	-- Integrate Metals with DAP
+	{
+		"mfussenegger/nvim-dap",
+		config = function()
+			local dap = require("dap")
+			dap.configurations.scala = {
+				{
+					type = "scala",
+					request = "launch",
+					name = "RunOrTest",
+					metals = {
+						runType = "runOrTestFile",
+					},
+				},
+				{
+					type = "scala",
+					srequest = "launch",
+					name = "Test Target",
+					metals = {
+						runType = "testTarget"
+					},
+				},
+			}
+		end,
 	},
 }
