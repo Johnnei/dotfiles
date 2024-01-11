@@ -49,5 +49,11 @@ vim.api.nvim_set_keymap('i', 'jk', '<ESC>', { noremap = true })  -- to exit to n
 vim.api.nvim_set_keymap('i', '<C-g>', '<ESC>', { noremap = true }) -- <C-g> to exit to normal mode
 vim.api.nvim_set_keymap('x', '<C-g>', '<ESC>', { noremap = true }) -- <C-g> to clear visual select
 
+-- Nicer window movement
+vim.api.nvim_set_keymap("n", "<C-h>", "<C-w>h", { desc = "Go to left window" })
+vim.api.nvim_set_keymap("n", "<C-j>", "<C-w>j", { desc = "Go to lower window" })
+vim.api.nvim_set_keymap("n", "<C-k>", "<C-w>k", { desc = "Go to upper window" })
+vim.api.nvim_set_keymap("n", "<C-l>", "<C-w>l", { desc = "Go to right window" })
+
 -- Integrate with OS clipboard
 vim.api.nvim_set_option("clipboard", "unnamed")

@@ -128,7 +128,7 @@ return {
 					{ 'gd', telescope.lsp_definitions, desc = "Goto Definition" },
 					{ 'K', vim.lsp.buf.hover, desc = "Hover" },
 					{ 'gi', telescope.lsp_implementations, desc = "Goto Implementation" },
-					{ '<C-k>', vim.lsp.buf.signature_help, desc = "Signature Help" },
+					{ 'gK', vim.lsp.buf.signature_help, desc = "Signature Help" },
 					{ '<leader>D', vim.lsp.buf.type_definition, desc = "Type Definition" },
 					{
 						'<leader>cr',
