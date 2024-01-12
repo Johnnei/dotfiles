@@ -150,11 +150,20 @@ return {
 					{
 						'<leader>fs',
 						function()
+							telescope.lsp_dynamic_workspace_symbols({
+								symbols = require("lazyvim.config").get_kind_filter()
+							})
+						end,
+						desc = "Goto Symbol (Workspace)"
+					},
+					{
+						'<leader>fS',
+						function()
 							telescope.lsp_document_symbols({
 								symbols = require("lazyvim.config").get_kind_filter()
 							})
 						end,
-						desc = "Goto Symbol"
+						desc = "Goto Symbol (Document)"
 					},
 				}
 
