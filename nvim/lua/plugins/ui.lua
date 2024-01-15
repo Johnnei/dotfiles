@@ -202,7 +202,20 @@ return {
 						event = "metals",
 					},
 					view = "mini",
-				}
+				},
+				-- JTDLS is noisy, make it quiet
+				{
+					filter = {
+						event = "lsp",
+						any = {
+							{ find = "Validate documents" },
+							{ find = "Publish Diagnostics" },
+						},
+					},
+					opts = {
+						skip = true,
+					},
+				},
 			},
 			presets = {
 				inc_rename = true
