@@ -86,7 +86,8 @@ return {
 						end
 					end
 					return 0
-				end
+				end,
+				layout_strategy = "vertical",
 			}
 		} end,
 	},
