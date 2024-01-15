@@ -5,3 +5,15 @@
 # SBT
 .bsp/
 
+# Company Mac
+.DS_Store
+.DS_Store?
+
+# Eclipse / JDTLS
+.project
+.classpath
+.factorypath
+
+# Metals
+.metals/
+.bloop/
