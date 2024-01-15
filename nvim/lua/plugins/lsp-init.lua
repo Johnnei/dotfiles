@@ -238,7 +238,6 @@ return {
 				"markdown",
 				"markdown_inline",
 				"json",
-				"hocon"
 			},
 		},
 		config = function(self, opts)

@@ -104,8 +104,8 @@ return {
 				["<leader>b"] = { name = "+buffer" },
 				["<leader>c"] = { name = "+code" },
 				["<leader>f"] = { name = "+file/find" },
-				["<leader>g"] = { name = "+git" },
-				["<leader>gh"] = { name = "+hunks" },
+				["<leader>g"] = { name = "+goto" },
+				["<leader>h"] = { name = "+hunks" },
 				["<leader>s"] = { name = "+search" },
 			},
 		},
@@ -135,11 +135,11 @@ return {
 					vim.keymap.set(mode, l, r, { buffer = buffer, desc = desc })
 				end
 
-				map({ "n", "v" }, "<leader>ghr", ":Gitsigns reset_hunk<CR>", "Reset Hunk")
+				map({ "n", "v" }, "<leader>hr", ":Gitsigns reset_hunk<CR>", "Reset Hunk")
 				map("n", "<leader>ghd", function() gs.diffthis('~') end, "Diff File")
 				map("n", "]h", gs.next_hunk, "Next Hunk")
 				map("n", "[h", gs.prev_hunk, "Prev Hunk")
-				map("n", "<leader>gb", function() gs.blame_line({ full = true }) end, "Blame Line")
+				map("n", "<leader>hb", function() gs.blame_line({ full = true }) end, "Blame Line")
 			end,
 		},
 	},
