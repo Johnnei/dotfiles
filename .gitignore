@@ -13,6 +13,8 @@
 .project
 .classpath
 .factorypath
+.settings/
+bin/
 
 # Metals
 .metals/
