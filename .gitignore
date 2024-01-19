@@ -19,3 +19,4 @@ bin/
 # Metals
 .metals/
 .bloop/
+metals.sbt
