@@ -56,4 +56,4 @@ vim.api.nvim_set_keymap("n", "<C-k>", "<C-w>k", { desc = "Go to upper window" })
 vim.api.nvim_set_keymap("n", "<C-l>", "<C-w>l", { desc = "Go to right window" })
 
 -- Integrate with OS clipboard
-vim.api.nvim_set_option("clipboard", "unnamed")
+vim.api.nvim_set_option("clipboard", "unnamedplus")
