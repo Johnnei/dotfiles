@@ -43,6 +43,7 @@ return {
 						"*.iml",
 					},
 					always_show = {
+						".gitlab",
 						".gitignore",
 						".gitlab-ci.yml",
 					},
