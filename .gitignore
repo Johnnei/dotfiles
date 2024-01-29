@@ -9,6 +9,9 @@
 .DS_Store
 .DS_Store?
 
+# Kotlin ls
+kls_database.db
+
 # Eclipse / JDTLS
 .project
 .classpath
