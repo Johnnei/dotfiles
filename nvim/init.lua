@@ -33,6 +33,11 @@ opt.listchars = {
 	trail = '·',
 }
 opt.list = true
+-- Status line replaces this
+opt.showmode = false
+-- Write on buffer changes
+opt.autowrite = true
+opt.undolevels = 1000
 
 require("lazy").setup("plugins")
 
