@@ -63,6 +63,12 @@ return {
 		branch = "0.1.x",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
+			{
+				"nvim-telescope/telescope-live-grep-args.nvim",
+				config = function()
+						require("telescope").load_extension("live_grep_args")
+				end,
+			},
 		},
 		keys = {
 			{ "<leader>ff", Util.telescope("files"), desc = "Find Files (root dir)" },
@@ -70,26 +76,46 @@ return {
 			{ "<leader><leader>", Util.telescope("files"), desc = "Find Files (root dir)" },
 			{ "<leader>fF", Util.telescope("files", { cwd = false }), desc = "Find Files (cwd)" },
 			{ "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent" },
-			{ "<leader>/", Util.telescope("live_grep"), desc = "Grep (root dir)" },
+			{
+				"<leader>/",
+				function() require("telescope").extensions.live_grep_args.live_grep_args() end,
+				desc = "Grep (root dir)"
+			},
 			{ "<leader>fh", Util.telescope("help_tags"), desc = "Help" },
 			{ "<leader>fc", Util.telescope("commands"), desc = "Commands" },
 		},
-		opts = function() return {
-			defaults = {
-				get_selection_window = function()
-					local wins = vim.api.nvim_list_wins()
-					table.insert(wins, 1, vim.api.nvim_get_current_win())
-					for _, win in ipairs(wins) do
-						local buf = vim.api.nvim_win_get_buf(win)
-						if vim.bo[buf].buftype == "" then
-							return win
+		opts = function()
+			local lga_actions = require("telescope-live-grep-args.actions")
+			return {
+				defaults = {
+					get_selection_window = function()
+						local wins = vim.api.nvim_list_wins()
+						table.insert(wins, 1, vim.api.nvim_get_current_win())
+						for _, win in ipairs(wins) do
+							local buf = vim.api.nvim_win_get_buf(win)
+							if vim.bo[buf].buftype == "" then
+								return win
+							end
 						end
-					end
-					return 0
-				end,
-				layout_strategy = "vertical",
+						return 0
+					end,
+					layout_strategy = "vertical",
+					mappings = {
+						i = {
+							["<C-k>"] = lga_actions.quote_prompt(),
+							["<C-i>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
+							["<C-t>"] = lga_actions.quote_prompt({ postfix = " --iglob **/test/**" }),
+							["<C-m>"] = lga_actions.quote_prompt({ postfix = " --iglob **/main/**" }),
+						},
+					},
+				},
+				extensions = {
+					live_grep_args = {
+						auto_quoting = true,
+					},
+				},
 			}
-		} end,
+		end,
 	},
 	-- key bindings help
 	{
@@ -104,7 +130,7 @@ return {
 				["<leader>b"] = { name = "+buffer" },
 				["<leader>c"] = { name = "+code" },
 				["<leader>f"] = { name = "+file/find" },
-				["<leader>g"] = { name = "+goto" },
+				["<leader>g"] = { name = "+git" },
 				["<leader>h"] = { name = "+hunks" },
 				["<leader>s"] = { name = "+search" },
 			},
@@ -136,12 +162,46 @@ return {
 				end
 
 				map({ "n", "v" }, "<leader>hr", ":Gitsigns reset_hunk<CR>", "Reset Hunk")
-				map("n", "<leader>ghd", function() gs.diffthis('~') end, "Diff File")
+				map("n", "<leader>hd", function() gs.diffthis('~') end, "Diff File")
 				map("n", "]h", gs.next_hunk, "Next Hunk")
 				map("n", "[h", gs.prev_hunk, "Prev Hunk")
 				map("n", "<leader>hb", function() gs.blame_line({ full = true }) end, "Blame Line")
 			end,
 		},
+	},
+	-- Integrate Git CLI
+	{
+		"tpope/vim-fugitive",
+		keys = {
+			{ "<leader>gb", "<cmd>Git blame<cr>", desc = "blame" },
+			{ "<leader>gs", "<cmd>Git st<cr>", desc = "status" },
+			{ "<leader>gca", "<cmd>Git ca<cr>", desc = "commit -a" },
+			{ "<leader>gl", "<cmd>Git log<cr>", desc = "log" },
+		},
+	},
+	-- Link to Gitlab
+	{
+		"linrongbin16/gitlinker.nvim",
+		keys = {
+			{
+				"<leader>gy",
+				"<cmd>GitLink<cr>",
+				mode = { "n", "v" },
+				desc = "Yank remote-url",
+			},
+		},
+		config = function()
+			require("gitlinker").setup({
+				router = {
+					browse = {
+						["^gitlab%.agodadev%.io"] = require("gitlinker.routers").gitlab_browse,
+					},
+					blame = {
+						["^gitlab%.agodadev%.io"] = require("gitlinker.routers").gitlab_blame,
+					},
+				},
+			})
+		end,
 	},
 	-- Highlight matching symbols under cursor
 	{

@@ -38,6 +38,8 @@ opt.showmode = false
 -- Write on buffer changes
 opt.autowrite = true
 opt.undolevels = 1000
+-- Case insensitive search
+opt.ignorecase = true
 
 require("lazy").setup("plugins")
 
