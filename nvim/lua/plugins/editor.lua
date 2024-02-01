@@ -63,11 +63,13 @@ return {
 		branch = "0.1.x",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
+			"nvim-telescope/telescope-live-grep-args.nvim",
 		},
 		keys = {
 			{ "<leader>ff", Util.telescope("files"), desc = "Find Files (root dir)" },
 			{ "<leader>:", "<cmd>Telescope command_history<cr>", desc = "Command History" },
 			{ "<leader><leader>", Util.telescope("files"), desc = "Find Files (root dir)" },
+			{ "<leader>gs", Util.telescope("git_status"), desc = "Find Files (root dir)" },
 			{ "<leader>fF", Util.telescope("files", { cwd = false }), desc = "Find Files (cwd)" },
 			{ "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent" },
 			{
@@ -101,18 +103,14 @@ return {
 							i = {
 								["<C-k>"] = require("telescope-live-grep-args.actions").quote_prompt(),
 								["<C-i>"] = require("telescope-live-grep-args.actions").quote_prompt({ postfix = " --iglob " }),
-								["<C-t>"] = require("telescope-live-grep-args.actions").quote_prompt({ postfix = " --iglob **/test/**" }),
-								["<C-m>"] = require("telescope-live-grep-args.actions").quote_prompt({ postfix = " --iglob **/main/**" }),
 							},
 						},
 					},
 				},
 			}
 		end,
-	},
-	{
-		"nvim-telescope/telescope-live-grep-args.nvim",
-		config = function()
+		config = function(_, opts)
+			require("telescope").setup(opts)
 			require("telescope").load_extension("live_grep_args")
 		end,
 	},
