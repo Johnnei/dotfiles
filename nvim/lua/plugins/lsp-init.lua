@@ -126,6 +126,7 @@ return {
 
 				local keys = {
 					{ 'gd', telescope.lsp_definitions, desc = "Goto Definition" },
+					{ 'gD', vim.lsp.buf.declaration, desc = "Goto Declaration" },
 					{ 'K', vim.lsp.buf.hover, desc = "Hover" },
 					{ 'gi', telescope.lsp_implementations, desc = "Goto Implementation" },
 					{ 'gK', vim.lsp.buf.signature_help, desc = "Signature Help" },

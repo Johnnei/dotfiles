@@ -70,6 +70,7 @@ return {
 			{ "<leader>:", "<cmd>Telescope command_history<cr>", desc = "Command History" },
 			{ "<leader><leader>", Util.telescope("files"), desc = "Find Files (root dir)" },
 			{ "<leader>gs", Util.telescope("git_status"), desc = "Find Files (root dir)" },
+			{ "<leader>gcb", Util.telescope("git_branches"), desc = "Branches" },
 			{ "<leader>fF", Util.telescope("files", { cwd = false }), desc = "Find Files (cwd)" },
 			{ "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent" },
 			{
@@ -128,6 +129,7 @@ return {
 				["<leader>c"] = { name = "+code" },
 				["<leader>f"] = { name = "+file/find" },
 				["<leader>g"] = { name = "+git" },
+				["<leader>gc"] = { name = "+checkout" },
 				["<leader>h"] = { name = "+hunks" },
 				["<leader>s"] = { name = "+search" },
 			},
