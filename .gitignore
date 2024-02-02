@@ -8,6 +8,7 @@
 # Company Mac
 .DS_Store
 .DS_Store?
+.java-version
 
 # Kotlin ls
 kls_database.db
