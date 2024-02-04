@@ -36,8 +36,7 @@ return {
 				follow_cursor = true,
 			},
 			filesystem = {
-				group_empty_dirs = true,
-				scan_mode = "deep",
+				bind_to_cwd = false,
 				filtered_items = {
 					hide_by_pattern = {
 						"*.iml",
@@ -52,8 +51,11 @@ return {
 					},
 				},
 				follow_current_file = {
-					enabled = false,
+					enabled = true,
 				},
+				group_empty_dirs = true,
+				scan_mode = "deep",
+				use_libuv_file_watcher = true,
 			},
 		},
 	},
