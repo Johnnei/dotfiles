@@ -242,6 +242,7 @@ return {
 				"markdown",
 				"markdown_inline",
 				"json",
+				"scala",
 			},
 		},
 		config = function(self, opts)
