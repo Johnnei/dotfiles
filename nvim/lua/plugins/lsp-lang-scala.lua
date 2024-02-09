@@ -19,7 +19,7 @@ return {
 		opts = function()
 			local metals_config = require("metals").bare_config()
 
-			metals_config.init_options.statusBarProvider = "on"
+			metals_config.init_options.statusBarProvider = "off"
 
 			metals_config.capabilities = require("cmp_nvim_lsp").default_capabilities()
 
@@ -30,20 +30,6 @@ return {
 
 			metals_config.on_attach = function(_, _)
 				require("metals").setup_dap()
-			end
-
-			-- Override metals/stauts to send to Noice mini
-			metals_config.handlers["metals/status"] = function(_, status)
-				local Manager = require("noice.message.manager")
-				local Message = require("noice.message")
-
-				if not status.hide then
-					local msg = Message("metals", "message", status.text)
-					msg.opts.title = "Metals"
-					msg.level = ""
-					msg.kind = "message"
-					Manager.add(msg)
-				end
 			end
 
 			return metals_config
