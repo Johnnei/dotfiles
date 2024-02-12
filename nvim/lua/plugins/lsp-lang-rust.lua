@@ -26,7 +26,7 @@ return {
 	-- All in one Rust development plugin
 	{
 		'mrcjkb/rustaceanvim',
-		version = '^3',
+		version = '^4',
 		ft = { 'rust' },
 		opts = {
 			tools = {
@@ -39,9 +39,12 @@ return {
 						["<leader>cR"] = { function() vim.cmd.RustLsp("codeAction") end, "Code Action" },
 						["<leader>dr"] = { function() vim.cmd.RustLsp("debuggables") end, "Rust debuggables" },
 					}, { mode = "n", buffer = bufnr })
-        end,
-				settings = {
+				end,
+				default_settings = {
 					['rust-analyzer'] = {
+						cargo = {
+							features = "all",
+						},
 					},
 				},
 			},
@@ -57,11 +60,11 @@ return {
 		"nvim-neotest/neotest",
 		optional = false,
 		dependencies = {
-			"rouge8/neotest-rust",
+			'mrcjkb/rustaceanvim',
 		},
 		opts = {
 			adapters = {
-				["neotest-rust"] = {}
+				['rustaceanvim.neotest'] = {},
 			},
 		}
 	}
