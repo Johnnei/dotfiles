@@ -40,6 +40,9 @@ opt.autowrite = true
 opt.undolevels = 1000
 -- Case insensitive search
 opt.ignorecase = true
+-- I can't spell, okey?
+opt.spell = true
+opt.spelllang = { "en" }
 
 require("lazy").setup("plugins")
 

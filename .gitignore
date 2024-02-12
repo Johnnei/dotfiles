@@ -24,3 +24,6 @@ bin/
 .metals/
 .bloop/
 metals.sbt
+
+# Neovim compiled spell files
+nvim/spell/*.spl

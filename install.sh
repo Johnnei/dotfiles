@@ -11,6 +11,7 @@ mkdir -vp $XDG_CONFIG_HOME/nvim
 ln --symbolic --force --verbose $PWD/nvim/init.lua $XDG_CONFIG_HOME/nvim/init.lua
 ln --symbolic --force --verbose $PWD/nvim/lazy-lock.json $XDG_CONFIG_HOME/nvim/lazy-lock.json
 ln --symbolic --force --no-target-directory --verbose $PWD/nvim/lua $XDG_CONFIG_HOME/nvim/lua
+ln --symbolic --force --no-target-directory --verbose $PWD/nvim/spell $XDG_CONFIG_HOME/nvim/spell
 
 # Install IDEA Vim config
 ln --symbolic --force --verbose $PWD/.ideavimrc ~/.ideavimrc
