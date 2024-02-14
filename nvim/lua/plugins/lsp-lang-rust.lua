@@ -38,6 +38,7 @@ return {
 					wk.register({
 						["<leader>cR"] = { function() vim.cmd.RustLsp("codeAction") end, "Code Action" },
 						["<leader>dr"] = { function() vim.cmd.RustLsp("debuggables") end, "Rust debuggables" },
+						["<leader>E"] = { function() vim.cmd.RustLsp("explainError") end, "Explain (Rust)" },
 					}, { mode = "n", buffer = bufnr })
 				end,
 				default_settings = {
