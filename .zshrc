@@ -82,3 +82,6 @@ export VISUAL=nvim
 
 # Vimmy bindings
 bindkey -v
+
+# Stop paging everything please
+unset LESS;
