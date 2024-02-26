@@ -26,4 +26,4 @@ bin/
 metals.sbt
 
 # Neovim compiled spell files
-nvim/spell/*.spl
+.config/nvim/spell/*.spl
