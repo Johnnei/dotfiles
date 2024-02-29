@@ -24,7 +24,7 @@
 	ff = only
 [core]
 	eol = lf
-	excludesfile = /home/johnnei/.gitignore
+	excludesfile = ~/.gitglobalignore
 [diff]
 	wsErrorHightlight = new,old
 
