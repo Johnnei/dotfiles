@@ -45,6 +45,8 @@ return {
 						".gitlab",
 						".gitignore",
 						".gitlab-ci.yml",
+						".config",
+						".local",
 					},
 					never_show = {
 						".DS_Store"
