@@ -140,6 +140,8 @@ return {
 						expr = true,
 					},
 					{ '<leader>ca', vim.lsp.buf.code_action, mode = { 'n', 'v' }, desc = "Code Action" },
+					{ "<leader>cc", vim.lsp.codelens.run, desc = "Run Codelens", mode = { "n", "v" }, has = "codeLens" },
+					{ "<leader>cC", vim.lsp.codelens.refresh, desc = "Refresh & Display Codelens", mode = { "n" }, has = "codeLens" },
 					{ 'gr', telescope.lsp_references, desc = "Goto Reference" },
 					{
 						'<leader>cf',
