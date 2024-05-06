@@ -1,1 +1,15 @@
 set clipboard+=unnamedplus
+
+" set <leader> to <space>
+nnoremap <SPACE> <Nop>
+let mapleader = " "
+
+" edit ideavim config
+nnoremap <leader>vv :e ~/.ideavimrc<CR>
+nnoremap <leader>vr :source ~/.ideavimrc<CR>
+
+" search for actions: :actionlist <pattern>
+" Mimic my neovim mappings
+nmap gd :action GotoImplementation<CR>
+nmap gr :action ShowUsages<CR>
+nmap <leader>cf  :action ReformatCode<CR>
