@@ -12,4 +12,5 @@ nnoremap <leader>vr :source ~/.ideavimrc<CR>
 " Mimic my neovim mappings
 nmap gd :action GotoImplementation<CR>
 nmap gr :action ShowUsages<CR>
-nmap <leader>cf  :action ReformatCode<CR>
+nmap <leader>cf :action ReformatCode<CR>
+nmap <leader>cr :action RenameElement<CR>
