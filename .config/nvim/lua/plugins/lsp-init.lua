@@ -46,6 +46,12 @@ return {
 		---@class PluginLspOpts
 		opts = {
 			capabilities = {},
+			inlay_hints = {
+				enabled = true,
+			},
+			codelens = {
+				enabled = true,
+			},
 			---@type lspconfig.options
 			servers = {
 				lua_ls = {},

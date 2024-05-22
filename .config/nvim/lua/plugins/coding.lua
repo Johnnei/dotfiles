@@ -37,6 +37,7 @@ return {
 		"zbirenbaum/copilot-cmp",
 		dependencies = "copilot.lua",
 		lazy = true,
+		enabled = false,
 		opts = {},
 		config = function(_, opts)
 			local copilot_cmp = require("copilot_cmp")
@@ -96,7 +97,7 @@ return {
 				}),
 				sources = cmp.config.sources(
 					{
-						{ name = "copilot" },
+						--{ name = "copilot" },
 						{ name = "nvim_lsp" },
 						{ name = "luasnip" },
 						{ name = "path" },
