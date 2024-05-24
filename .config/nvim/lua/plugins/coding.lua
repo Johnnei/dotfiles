@@ -37,7 +37,6 @@ return {
 		"zbirenbaum/copilot-cmp",
 		dependencies = "copilot.lua",
 		lazy = true,
-		enabled = false,
 		opts = {},
 		config = function(_, opts)
 			local copilot_cmp = require("copilot_cmp")
@@ -67,8 +66,17 @@ return {
 		},
 		opts = function()
 			vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
+
+			local has_words_before = function()
+				if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then
+					return false
+				end
+				local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+				return col ~= 0 and vim.api.nvim_buf_get_text(0, line-1, 0, line-1, col, {})[1]:match("^%s*$") == nil
+			end
+
 			local cmp = require("cmp")
-			local defaults = require("cmp.config.default")()
+			local compare = require('cmp.config.compare')
 			return {
 				completion = {
 					completeopt = "menu,menuone,noinsert",
@@ -85,7 +93,13 @@ return {
 					["<C-f>"] = cmp.mapping.scroll_docs(4),
 					["<C-Space>"] = cmp.mapping.complete(),
 					["<C-e>"] = cmp.mapping.abort(),
-					["<tab>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+					["<tab>"] = vim.schedule_wrap(function(fallback)
+						if cmp.visible() and has_words_before() then
+							cmp.mapping.confirm({ select = true })
+						else
+							fallback()
+						end
+					end),
 					["<S-CR>"] = cmp.mapping.confirm({
 						behavior = cmp.ConfirmBehavior.Replace,
 						select = true,
@@ -97,7 +111,7 @@ return {
 				}),
 				sources = cmp.config.sources(
 					{
-						--{ name = "copilot" },
+						{ name = "copilot" },
 						{ name = "nvim_lsp" },
 						{ name = "luasnip" },
 						{ name = "path" },
@@ -123,7 +137,24 @@ return {
 						hl_group = "CmpGhostText",
 					},
 				},
-				sorting = defaults.sorting,
+				sorting = {
+					priority_weight = 2,
+					comparators = {
+						-- Exact LSP matches before LLM guesses
+						compare.exact,
+
+						require("copilot_cmp.comparators").prioritize,
+
+						-- cmp default, except exact is moved first.
+						compare.offset,
+						compare.score,
+						compare.recently_used,
+						compare.locality,
+						compare.kind,
+						compare.length,
+						compare.order,
+					}
+				},
 			}
 		end,
 		---@param opts cmp.ConfigSchema
