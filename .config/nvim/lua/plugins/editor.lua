@@ -76,6 +76,9 @@ return {
 			"nvim-lua/plenary.nvim",
 			"nvim-telescope/telescope-live-grep-args.nvim",
 			"nvim-telescope/telescope-fzf-native.nvim",
+			{
+				"sshelll/telescope-switch.nvim"
+			},
 		},
 		keys = {
 			{ "<leader>ff", Util.telescope("files"), desc = "Find Files (root dir)" },
@@ -92,6 +95,7 @@ return {
 			},
 			{ "<leader>fh", Util.telescope("help_tags"), desc = "Help" },
 			{ "<leader>fc", Util.telescope("commands"), desc = "Commands" },
+			{ "<leader>ft", "<cmd>Telescope switch<cr>", desc = "Switch to related files" },
 		},
 		opts = function()
 			return {
@@ -119,6 +123,30 @@ return {
 							},
 						},
 					},
+					switch = {
+						matchers = {
+							{
+								name = "Scala Spec",
+								from = "src/main/scala/(.*).scala$",
+								to = "src/test/scala/%1Spec.scala"
+							},
+							{
+								name = "Scala Test",
+								from = "src/main/scala/(.*).scala$",
+								to = "src/test/scala/%1Test.scala"
+							},
+							{
+								name = "Scala Impl",
+								from = "src/test/scala/(.*)(Spec|Test).scala$",
+								to = "src/main/scala/%1.scala",
+							},
+						},
+						picker = {
+							layout_strategy = "vertical",
+							-- Disable plugin's layout sizing
+							layout_config = false,
+						},
+					},
 				},
 			}
 		end,
@@ -126,6 +154,7 @@ return {
 			require("telescope").setup(opts)
 			require("telescope").load_extension("live_grep_args")
 			require("telescope").load_extension("fzf")
+			require("telescope").load_extension("switch")
 		end,
 	},
 	-- key bindings help
