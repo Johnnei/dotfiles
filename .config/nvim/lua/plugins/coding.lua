@@ -12,7 +12,7 @@ return {
 		"Saecki/crates.nvim",
 		event = { "BufRead Cargo.toml" },
 		opts = {
-			src = {
+			completion = {
 				cmp = { enabled = true },
 			},
 		},
@@ -93,18 +93,18 @@ return {
 					["<C-f>"] = cmp.mapping.scroll_docs(4),
 					["<C-Space>"] = cmp.mapping.complete(),
 					["<C-e>"] = cmp.mapping.abort(),
-					["<tab>"] = vim.schedule_wrap(function(fallback)
-						if cmp.visible() and has_words_before() then
-							cmp.mapping.confirm({ select = true })
-						else
+					["<Tab>"] = function (fallback)
+						if vim.bo.buftype ~= "prompt" and has_words_before() then
+							cmp.confirm({ select = true })
+					  else
 							fallback()
 						end
-					end),
-					["<S-CR>"] = cmp.mapping.confirm({
+					end,
+					["<S-Tab>"] = cmp.mapping.confirm({
 						behavior = cmp.ConfirmBehavior.Replace,
 						select = true,
 					}), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-					["<C-CR>"] = function(fallback)
+					["<C-Tab>"] = function(fallback)
 						cmp.abort()
 						fallback()
 					end,

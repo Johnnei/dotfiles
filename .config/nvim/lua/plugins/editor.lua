@@ -62,6 +62,12 @@ return {
 			},
 		},
 	},
+	-- Improved Fuzzy Searching in Telescope
+	{
+		"nvim-telescope/telescope-fzf-native.nvim",
+		lazy = true,
+		build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build"
+	},
 	-- Add file search
 	{
 		"nvim-telescope/telescope.nvim",
@@ -69,6 +75,7 @@ return {
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-telescope/telescope-live-grep-args.nvim",
+			"nvim-telescope/telescope-fzf-native.nvim",
 		},
 		keys = {
 			{ "<leader>ff", Util.telescope("files"), desc = "Find Files (root dir)" },
@@ -118,6 +125,7 @@ return {
 		config = function(_, opts)
 			require("telescope").setup(opts)
 			require("telescope").load_extension("live_grep_args")
+			require("telescope").load_extension("fzf")
 		end,
 	},
 	-- key bindings help
