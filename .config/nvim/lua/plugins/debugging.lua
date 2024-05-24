@@ -17,6 +17,9 @@ return {
 			-- Debug Adapter Protocol UI
 			{
 				"rcarriga/nvim-dap-ui",
+				dependencies = {
+					"nvim-neotest/nvim-nio",
+				},
 				keys = {
 					{ "<leader>du", function() require("dapui").toggle({ }) end, desc = "Dap UI" },
 					{ "<leader>de", function() require("dapui").eval() end, desc = "Eval", mode = {"n", "v"} },
@@ -28,12 +31,6 @@ return {
 					dapui.setup(opts)
 					dap.listeners.after.event_initialized["dapui_config"] = function()
 						dapui.open({})
-					end
-					dap.listeners.before.event_terminated["dapui_config"] = function()
-						dapui.close({})
-					end
-					dap.listeners.before.event_exited["dapui_config"] = function()
-						dapui.close({})
 					end
 				end,
 			},
@@ -73,7 +70,12 @@ return {
 			{ "<leader>dp", function() require("dap").pause() end, desc = "Pause" },
 			{ "<leader>dr", function() require("dap").repl.toggle() end, desc = "Toggle REPL" },
 			{ "<leader>ds", function() require("dap").session() end, desc = "Session" },
-			{ "<leader>dt", function() require("dap").terminate() end, desc = "Terminate" },
+			{ "<leader>dt", function()
+					require("dap").terminate()
+					require("dapui").close()
+				end,
+				desc = "Terminate",
+			},
 			{ "<leader>dw", function() require("dap.ui.widgets").hover() end, desc = "Widgets" },
 		},
 		config = function()

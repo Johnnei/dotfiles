@@ -33,7 +33,17 @@ return {
 	-- Improve Neovim DevX
 	{
 		"folke/neodev.nvim",
-		opts = {},
+		dependencies = {
+				"rcarriga/nvim-dap-ui",
+		},
+		opts = {
+			library = {
+				plugins = {
+					"nvim-dap-ui",
+				},
+				types = true,
+			},
+		},
 	},
 	{
 		-- Language Server Protocol integration
