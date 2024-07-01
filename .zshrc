@@ -80,6 +80,13 @@ source $ZSH/oh-my-zsh.sh
 export EDITOR=nvim
 export VISUAL=nvim
 
+# Golang
+export GOPATH=$HOME/go
+path+=( $GOPATH/bin )
+
+# Export to sub process
+export PATH
+
 # Vimmy bindings
 bindkey -v
 
