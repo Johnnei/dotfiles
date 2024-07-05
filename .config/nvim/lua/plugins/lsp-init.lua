@@ -33,6 +33,7 @@ return {
 	-- Improve Neovim DevX
 	{
 		"folke/neodev.nvim",
+		lazy = true,
 		dependencies = {
 				"rcarriga/nvim-dap-ui",
 		},
