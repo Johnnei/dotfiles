@@ -1,1 +1,2 @@
 .config/zsh/config.d/*.zsh
+!.config/zsh/config.d/kubernetes.zsh
