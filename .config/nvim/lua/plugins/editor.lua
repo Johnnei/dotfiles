@@ -66,7 +66,8 @@ return {
 	{
 		"nvim-telescope/telescope-fzf-native.nvim",
 		lazy = true,
-		build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build"
+		build =
+		"cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build"
 	},
 	-- Add file search
 	{
@@ -81,20 +82,20 @@ return {
 			},
 		},
 		keys = {
-			{ "<leader>ff", Util.telescope("files"), desc = "Find Files (root dir)" },
-			{ "<leader>:", "<cmd>Telescope command_history<cr>", desc = "Command History" },
-			{ "<leader><leader>", Util.telescope("files"), desc = "Find Files (root dir)" },
-			{ "<leader>gs", Util.telescope("git_status"), desc = "Find Files (root dir)" },
-			{ "<leader>gcb", Util.telescope("git_branches"), desc = "Branches" },
-			{ "<leader>fF", Util.telescope("files", { cwd = false }), desc = "Find Files (cwd)" },
-			{ "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent" },
+			{ "<leader>ff",       Util.telescope("files"),                  desc = "Find Files (root dir)" },
+			{ "<leader>:",        "<cmd>Telescope command_history<cr>",     desc = "Command History" },
+			{ "<leader><leader>", Util.telescope("files"),                  desc = "Find Files (root dir)" },
+			{ "<leader>gs",       Util.telescope("git_status"),             desc = "Find Files (root dir)" },
+			{ "<leader>gcb",      Util.telescope("git_branches"),           desc = "Branches" },
+			{ "<leader>fF",       Util.telescope("files", { cwd = false }), desc = "Find Files (cwd)" },
+			{ "<leader>fr",       "<cmd>Telescope oldfiles<cr>",            desc = "Recent" },
 			{
 				"<leader>/",
 				function() require("telescope").extensions.live_grep_args.live_grep_args() end,
 				desc = "Grep (root dir)"
 			},
 			{ "<leader>fh", Util.telescope("help_tags"), desc = "Help" },
-			{ "<leader>fc", Util.telescope("commands"), desc = "Commands" },
+			{ "<leader>fc", Util.telescope("commands"),  desc = "Commands" },
 			{ "<leader>ft", "<cmd>Telescope switch<cr>", desc = "Switch to related files" },
 		},
 		opts = function()
@@ -163,23 +164,26 @@ return {
 		event = "VeryLazy",
 		opts = {
 			plugins = { spelling = true },
-			defaults = {
-				mode = { "n", "v" },
-				["]"] = { name = "+next" },
-				["["] = { name = "+prev" },
-				["<leader>b"] = { name = "+buffer" },
-				["<leader>c"] = { name = "+code" },
-				["<leader>f"] = { name = "+file/find" },
-				["<leader>g"] = { name = "+git" },
-				["<leader>gc"] = { name = "+checkout" },
-				["<leader>h"] = { name = "+hunks" },
-				["<leader>s"] = { name = "+search" },
+			spec = {
+				{
+					mode = { "n", "v" },
+					{ "]",          group = "next" },
+					{ "[",          group = "prev" },
+					{ "<leader>b",  group = "buffer" },
+					{ "<leader>c",  group = "code" },
+					{ "<leader>d",  group = "debug" },
+					{ "<leader>f",  group = "file/find" },
+					{ "<leader>g",  group = "git" },
+					{ "<leader>gc", group = "checkout" },
+					{ "<leader>h",  group = "hunks" },
+					{ "<leader>s",  group = "search" },
+					{ "<leader>t",  group = "test" },
+				}
 			},
 		},
-		config = function (_, opts)
+		config = function(_, opts)
 			local wk = require("which-key")
 			wk.setup(opts)
-			wk.register(opts.defaults)
 		end,
 	},
 	-- Editor Git Integration
@@ -214,10 +218,10 @@ return {
 	{
 		"tpope/vim-fugitive",
 		keys = {
-			{ "<leader>gb", "<cmd>Git blame<cr>", desc = "blame" },
-			{ "<leader>gs", "<cmd>Git st<cr>", desc = "status" },
-			{ "<leader>gca", "<cmd>Git ca<cr>", desc = "commit -a" },
-			{ "<leader>gl", "<cmd>Git log<cr>", desc = "log" },
+			{ "<leader>gb",  "<cmd>Git blame<cr>", desc = "blame" },
+			{ "<leader>gs",  "<cmd>Git st<cr>",    desc = "status" },
+			{ "<leader>gca", "<cmd>Git ca<cr>",    desc = "commit -a" },
+			{ "<leader>gl",  "<cmd>Git log<cr>",   desc = "log" },
 		},
 	},
 	-- Link to Gitlab
@@ -255,7 +259,7 @@ return {
 				prodivders = { "lsp" },
 			},
 		},
-		config = function (_, opts)
+		config = function(_, opts)
 			require("illuminate").configure(opts)
 		end,
 	},
@@ -291,10 +295,10 @@ return {
 		cmd = { "TroubleToggle", "Trouble" },
 		opts = { use_diagnostic_signs = true },
 		keys = {
-			{ "<leader>xx", "<cmd>TroubleToggle document_diagnostics<cr>", desc = "Document Diagnostics (Trouble)" },
+			{ "<leader>xx", "<cmd>TroubleToggle document_diagnostics<cr>",  desc = "Document Diagnostics (Trouble)" },
 			{ "<leader>xX", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "Workspace Diagnostics (Trouble)" },
-			{ "<leader>xL", "<cmd>TroubleToggle loclist<cr>", desc = "Location List (Trouble)" },
-			{ "<leader>xQ", "<cmd>TroubleToggle quickfix<cr>", desc = "Quickfix List (Trouble)" },
+			{ "<leader>xL", "<cmd>TroubleToggle loclist<cr>",               desc = "Location List (Trouble)" },
+			{ "<leader>xQ", "<cmd>TroubleToggle quickfix<cr>",              desc = "Quickfix List (Trouble)" },
 			{
 				"[q",
 				function()

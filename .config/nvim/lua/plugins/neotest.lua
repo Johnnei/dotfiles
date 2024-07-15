@@ -1,13 +1,4 @@
 return {
-	-- Add hint for tests
-	{
-		"folke/which-key.nvim",
-		opts = {
-			defaults = {
-				["<leader>t"] = { name = "+test" },
-			},
-		},
-	},
 	-- Running Tests from VIM integration
 	{
 		"nvim-neotest/neotest",

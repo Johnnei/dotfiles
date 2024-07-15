@@ -1,14 +1,4 @@
 return {
-	-- Hint future me about debugging keymaps
-	{
-		"folke/which-key.nvim",
-		optional = true,
-		opts = {
-			defaults = {
-				["<leader>d"] = { name = "+debug" },
-			},
-		},
-	},
 	-- Debug Adapter Protocol client
 	{
 		"mfussenegger/nvim-dap",
