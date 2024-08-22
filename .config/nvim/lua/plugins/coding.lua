@@ -17,7 +17,7 @@ return {
 			},
 		},
 	},
-	-- Github Copilot
+	--[[ Github Copilot
 	{
 		"zbirenbaum/copilot.lua",
 		cmd = "Copilot",
@@ -49,7 +49,7 @@ return {
 				end
 			end)
 		end,
-	},
+	},--]]
 	-- auto completion
 	{
 		"hrsh7th/nvim-cmp",
@@ -62,7 +62,7 @@ return {
 			"L3MON4D3/LuaSnip",
 			"saadparwaiz1/cmp_luasnip",
 			"Saecki/crates.nvim",
-			"zbirenbaum/copilot-cmp",
+			-- "zbirenbaum/copilot-cmp",
 		},
 		opts = function()
 			vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
@@ -109,7 +109,7 @@ return {
 				}),
 				sources = cmp.config.sources(
 					{
-						{ name = "copilot" },
+						-- { name = "copilot" },
 						{ name = "nvim_lsp" },
 						{ name = "luasnip" },
 						{ name = "path" },
@@ -141,7 +141,7 @@ return {
 						-- Exact LSP matches before LLM guesses
 						compare.exact,
 
-						require("copilot_cmp.comparators").prioritize,
+						-- require("copilot_cmp.comparators").prioritize,
 
 						-- cmp default, except exact is moved first.
 						compare.offset,
