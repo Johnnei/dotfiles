@@ -29,6 +29,8 @@ return {
 				excludedPackages = { "akka.actor.typed.javadsl", "com.github.swagger.akka.javadsl" },
 			}
 
+			metals_config.find_root_dir_max_project_nesting = 2
+
 			metals_config.on_attach = function(_, _)
 				require("metals").setup_dap()
 			end
