@@ -15,5 +15,13 @@ nmap gr :action ShowUsages<CR>
 nmap <leader>cf :action ReformatCode<CR>
 nmap <leader>cr :action RenameElement<CR>
 
+nmap <S-l> :action NextTab<CR>
+nmap <S-h> :action PreviousTab<CR>
+
 nmap [e :action GotoPreviousError<CR>
 nmap ]e :action GotoNextError<CR>
+nmap [h :action JumpToLastChange<CR>
+nmap ]h :action JumpToNextChange<CR>
+
+nmap <leader>bd :action CloseContent<CR>
+nmap <leader>bo :action CloseAllEditorsButActive<CR>
