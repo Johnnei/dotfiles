@@ -84,6 +84,10 @@ export VISUAL=nvim
 export GOPATH=$HOME/go
 path+=( $GOPATH/bin )
 
+# Java
+path+=( $HOME/.jenv/bin )
+eval "$(jenv init -)"
+
 # Export to sub process
 export PATH
 
