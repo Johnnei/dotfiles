@@ -35,11 +35,14 @@ return {
 				on_attach = function(client, bufnr)
 					-- register which-key mappings
 					local wk = require("which-key")
-					wk.register({
-						["<leader>cR"] = { function() vim.cmd.RustLsp("codeAction") end, "Code Action" },
-						["<leader>dr"] = { function() vim.cmd.RustLsp("debuggables") end, "Rust debuggables" },
-						["<leader>E"] = { function() vim.cmd.RustLsp("explainError") end, "Explain (Rust)" },
-					}, { mode = "n", buffer = bufnr })
+					wk.add(
+						{
+							{ "<leader>cR", function() vim.cmd.RustLsp("codeAction") end,   desc = "Code Action" },
+							{ "<leader>dr", function() vim.cmd.RustLsp("debuggables") end,  desc = "Rust debuggables" },
+							{ "<leader>E",  function() vim.cmd.RustLsp("explainError") end, desc = "Explain (Rust)" },
+						},
+						{ mode = "n", buffer = bufnr }
+					)
 				end,
 				default_settings = {
 					['rust-analyzer'] = {
