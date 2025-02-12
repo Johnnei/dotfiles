@@ -27,3 +27,6 @@ metals.sbt
 
 # Neovim compiled spell files
 .config/nvim/spell/*.spl
+
+# Ansible Secrets
+vault_access
