@@ -51,10 +51,10 @@ vim.cmd.colorscheme "catppuccin"
 -- Global mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
-vim.keymap.set('n', '[e', function() vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity["ERROR"] }) end)
-vim.keymap.set('n', ']e', function() vim.diagnostic.goto_next({ severity = vim.diagnostic.severity["ERROR"] }) end)
+vim.keymap.set('n', '[d', function() vim.diagnostic.jump({ count = -1 }) end)
+vim.keymap.set('n', ']d', function() vim.diagnostic.jump({ count = 1 }) end)
+vim.keymap.set('n', '[e', function() vim.diagnostic.jump({ count = -1, severity = vim.diagnostic.severity.ERROR }) end)
+vim.keymap.set('n', ']e', function() vim.diagnostic.jump({ count = 1, severity = vim.diagnostic.severity.ERROR }) end)
 vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
 
 vim.api.nvim_set_keymap('i', 'jk', '<ESC>', { noremap = true })  -- to exit to normal mode
@@ -68,4 +68,4 @@ vim.api.nvim_set_keymap("n", "<C-k>", "<C-w>k", { desc = "Go to upper window" })
 vim.api.nvim_set_keymap("n", "<C-l>", "<C-w>l", { desc = "Go to right window" })
 
 -- Integrate with OS clipboard
-vim.api.nvim_set_option("clipboard", "unnamedplus")
+vim.api.nvim_set_option_value("clipboard", "unnamedplus", {})
