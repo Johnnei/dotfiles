@@ -117,6 +117,10 @@ return {
 				extensions = {
 					live_grep_args = {
 						auto_quoting = true,
+						additional_args = {
+							"--hidden",
+							"--glob=!.git/*"
+						},
 						mappings = {
 							i = {
 								["<C-k>"] = require("telescope-live-grep-args.actions").quote_prompt(),
