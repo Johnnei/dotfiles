@@ -72,7 +72,7 @@ return {
 					return false
 				end
 				local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-				return col ~= 0 and vim.api.nvim_buf_get_text(0, line-1, 0, line-1, col, {})[1]:match("^%s*$") == nil
+				return col ~= 0 and vim.api.nvim_buf_get_text(0, line - 1, 0, line - 1, col, {})[1]:match("^%s*$") == nil
 			end
 
 			local cmp = require("cmp")
@@ -91,10 +91,10 @@ return {
 					["<C-f>"] = cmp.mapping.scroll_docs(4),
 					["<C-Space>"] = cmp.mapping.complete(),
 					["<C-e>"] = cmp.mapping.abort(),
-					["<Tab>"] = function (fallback)
+					["<Tab>"] = function(fallback)
 						if vim.bo.buftype ~= "prompt" and has_words_before() then
 							cmp.confirm({ select = true })
-					  else
+						else
 							fallback()
 						end
 					end,
@@ -169,5 +169,21 @@ return {
 		event = "VeryLazy",
 		version = false,
 		opts = {},
+	},
+	-- Refactoring tools
+	{
+		"ThePrimeagen/refactoring.nvim",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-treesitter/nvim-treesitter",
+		},
+		lazy = false,
+		keys = {
+			{ "<leader>re", "<cmd>Refactor extract <cr>", desc = "Extract Method", mode = { "x" } },
+			{ "<leader>rv", "<cmd>Refactor extract_var <cr>", desc = "Extract Variable", mode = { "x" } },
+		},
+		config = function()
+			require("refactoring").setup()
+		end,
 	},
 }

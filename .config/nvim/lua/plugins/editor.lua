@@ -182,6 +182,7 @@ return {
 					{ "<leader>h",  group = "hunks" },
 					{ "<leader>s",  group = "search" },
 					{ "<leader>t",  group = "test" },
+					{ "<leader>r",  group = "refactoring" },
 				}
 			},
 		},
