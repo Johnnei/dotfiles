@@ -147,7 +147,7 @@ return {
 					{ 'K', function() return vim.lsp.buf.hover() end, desc = "Hover" },
 					{ 'gi', telescope.lsp_implementations, desc = "Goto Implementation" },
 					{ 'gK', function() return vim.lsp.buf.signature_help() end, desc = "Signature Help" },
-					{ '<leader>D', vim.lsp.buf.type_definition, desc = "Type Definition" },
+					{ 'gy', vim.lsp.buf.type_definition, desc = "Type Definition" },
 					{
 						'<leader>cr',
 						function()
