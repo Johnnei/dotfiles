@@ -146,7 +146,8 @@ return {
 					{ 'gD', vim.lsp.buf.declaration, desc = "Goto Declaration" },
 					{ 'K', function() return vim.lsp.buf.hover() end, desc = "Hover" },
 					{ 'gi', telescope.lsp_implementations, desc = "Goto Implementation" },
-					{ 'gK', function() return vim.lsp.buf.signature_help() end, desc = "Signature Help" },
+					{ 'gK', function() return vim.lsp.buf.signature_help() end, desc = "Signature Help", has = "signatureHelp" },
+					{ "<c-k>", function() return vim.lsp.buf.signature_help() end, mode = "i", desc = "Signature Help", has = "signatureHelp" },
 					{ 'gy', vim.lsp.buf.type_definition, desc = "Type Definition" },
 					{
 						'<leader>cr',
