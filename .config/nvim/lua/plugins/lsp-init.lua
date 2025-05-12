@@ -3,7 +3,7 @@ local Util = require("lazyvim.util")
 return {
 	{
 		-- Build tool management
-		"williamboman/mason.nvim",
+		"mason-org/mason.nvim",
 		build = ":MasonUpdate",
 		opts = {
 			ensure_installed = {
@@ -50,8 +50,8 @@ return {
 		-- Language Server Protocol integration
 		"neovim/nvim-lspconfig",
 		dependencies = {
-			"williamboman/mason.nvim",
-			"williamboman/mason-lspconfig.nvim",
+			"mason-org/mason.nvim",
+			"mason-org/mason-lspconfig.nvim",
 			"folke/neodev.nvim",
 		},
 		---@class PluginLspOpts
@@ -205,7 +205,7 @@ return {
 
 			-- Connect to Mason
 			local masonlsp = require("mason-lspconfig")
-			local all_mslp_servers = vim.tbl_keys(require("mason-lspconfig.mappings.server").lspconfig_to_package)
+			local all_mslp_servers = vim.tbl_keys(require("mason-lspconfig").get_mappings().lspconfig_to_package)
 			local ensure_installed = {} ---@type string[]
 
 			local function setup(server)

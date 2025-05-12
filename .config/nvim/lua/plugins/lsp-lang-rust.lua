@@ -16,7 +16,7 @@ return {
 	},
 	-- Install Rust debug binaries
 	{
-		"williamboman/mason.nvim",
+		"mason-org/mason.nvim",
 		opts = function(_, opts)
 			if type(opts.ensure_installed) == "table" then
 				vim.list_extend(opts.ensure_installed, { "codelldb" })
@@ -26,7 +26,7 @@ return {
 	-- All in one Rust development plugin
 	{
 		'mrcjkb/rustaceanvim',
-		version = '^4',
+		version = '^6',
 		ft = { 'rust' },
 		opts = {
 			tools = {
@@ -53,6 +53,7 @@ return {
 				},
 			},
 			dap = {
+				load_rust_types = true,
 			},
 		},
 		config = function(_, opts)
