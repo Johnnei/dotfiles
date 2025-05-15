@@ -1,19 +1,4 @@
 return {
-	-- Setup Rust LSP
-	{
-		"neovim/nvim-lspconfig",
-		opts = {
-			servers = {
-				rust_analyzer = {},
-			},
-			setup = {
-				rust_analyzer = function()
-					-- Should be handled by rustaceanvim
-					return true
-				end
-			}
-		}
-	},
 	-- Install Rust debug binaries
 	{
 		"mason-org/mason.nvim",
@@ -46,7 +31,10 @@ return {
 				default_settings = {
 					['rust-analyzer'] = {
 						cargo = {
-							features = "all",
+							allFeatures = true,
+							buildScripts = {
+								enable = true,
+							},
 						},
 					},
 				},
