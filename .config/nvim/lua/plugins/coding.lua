@@ -17,39 +17,6 @@ return {
 			},
 		},
 	},
-	--[[ Github Copilot
-	{
-		"zbirenbaum/copilot.lua",
-		cmd = "Copilot",
-		build = ":Copilot auth",
-		lazy = true,
-		opts = {
-			suggestions = { enabled = false },
-			panel = { enabled = false },
-			filetypes = {
-				markdown = true,
-				help = true
-			}
-		}
-	},
-	-- cmp integration for copilot
-	{
-		"zbirenbaum/copilot-cmp",
-		dependencies = "copilot.lua",
-		lazy = true,
-		opts = {},
-		config = function(_, opts)
-			local copilot_cmp = require("copilot_cmp")
-			copilot_cmp.setup(opts)
-			-- attach cmp source whenever copilot attaches
-			-- fixes lazy-loading issues with the copilot cmp source
-			require("lazyvim.util").lsp.on_attach(function(client)
-				if client.name == "copilot" then
-					copilot_cmp._on_insert_enter({})
-				end
-			end)
-		end,
-	},--]]
 	-- auto completion
 	{
 		"hrsh7th/nvim-cmp",
@@ -140,9 +107,6 @@ return {
 					comparators = {
 						-- Exact LSP matches before LLM guesses
 						compare.exact,
-
-						-- require("copilot_cmp.comparators").prioritize,
-
 						-- cmp default, except exact is moved first.
 						compare.offset,
 						compare.score,
