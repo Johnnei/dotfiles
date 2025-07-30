@@ -90,6 +90,11 @@ return {
 			{ "<leader>fF",       Util.telescope("files", { cwd = false }), desc = "Find Files (cwd)" },
 			{ "<leader>fr",       "<cmd>Telescope oldfiles<cr>",            desc = "Recent" },
 			{
+				"<leader>fw",
+				function() require("telescope.builtin").grep_string({ search = vim.fn.expand("<cword>") }) end,
+				desc = "Find Word under Cursor"
+			},
+			{
 				"<leader>/",
 				function() require("telescope").extensions.live_grep_args.live_grep_args() end,
 				desc = "Grep (root dir)"
