@@ -19,16 +19,12 @@
         "mpd",
         "idle_inhibitor",
         "pulseaudio",
-        "power-profiles-daemon",
         "cpu",
         "memory",
-        "temperature",
-        "backlight",
         "keyboard-state",
         "sway/language",
         "clock",
-        "tray",
-        "custom/power"
+        "tray"
     ],
     // Modules configuration
     // "sway/workspaces": {
