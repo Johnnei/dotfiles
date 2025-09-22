@@ -218,7 +218,7 @@ return {
 					-- Other way / plugin to set up this server
 					return
 				end
-				require("lspconfig")[server].setup(server_opts)
+				vim.lsp.config(server, server_opts)
 			end
 
 			for server, server_opts in pairs(servers) do

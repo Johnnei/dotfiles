@@ -5,18 +5,18 @@ local Util = require("lazyvim.util")
 ---@param config table
 ---@param custom function | table | nil
 local function extend_or_override(config, custom, ...)
-  if type(custom) == "function" then
-    config = custom(config, ...) or config
-  elseif custom then
-    config = vim.tbl_deep_extend("force", config, custom) --[[@as table]]
-  end
-  return config
+	if type(custom) == "function" then
+		config = custom(config, ...) or config
+	elseif custom then
+		config = vim.tbl_deep_extend("force", config, custom) --[[@as table]]
+	end
+	return config
 end
 
 return {
 	-- Add java binaries
 	{
-    "mfussenegger/nvim-dap",
+		"mfussenegger/nvim-dap",
 		dependencies = {
 			{
 				"mason-org/mason.nvim",
@@ -26,7 +26,7 @@ return {
 					end
 				end,
 			},
-		}
+		},
 	},
 	-- Add java to treesitter
 	{
@@ -47,9 +47,9 @@ return {
 				jdtls = function()
 					-- Let jdtls handle startup
 					return true
-				end
+				end,
 			},
-		}
+		},
 	},
 	-- Configure Java LSP
 	{
@@ -63,8 +63,9 @@ return {
 			return {
 				-- How to find the root dir for a given filename. The default comes from
 				-- lspconfig which provides a function specifically for java projects.
-				root_dir = require("lspconfig.server_configurations.jdtls").default_config.root_dir,
-
+				root_dir = function(path)
+					return vim.fs.root(path, vim.lsp.config.jdtls.root_markers)
+				end,
 				project_name = function(root_dir)
 					return root_dir and vim.fs.basename(root_dir)
 				end,
