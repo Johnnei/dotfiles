@@ -12,8 +12,11 @@ return {
 		"Saecki/crates.nvim",
 		event = { "BufRead Cargo.toml" },
 		opts = {
-			completion = {
-				cmp = { enabled = true },
+			lsp = {
+				enabled = true,
+				actions = true,
+				completion = true,
+				hover = true,
 			},
 		},
 	},
@@ -39,11 +42,12 @@ return {
 					return false
 				end
 				local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-				return col ~= 0 and vim.api.nvim_buf_get_text(0, line - 1, 0, line - 1, col, {})[1]:match("^%s*$") == nil
+				return col ~= 0
+					and vim.api.nvim_buf_get_text(0, line - 1, 0, line - 1, col, {})[1]:match("^%s*$") == nil
 			end
 
 			local cmp = require("cmp")
-			local compare = require('cmp.config.compare')
+			local compare = require("cmp.config.compare")
 			return {
 				completion = {
 					completeopt = "menu,menuone,noinsert",
@@ -74,20 +78,16 @@ return {
 						fallback()
 					end,
 				}),
-				sources = cmp.config.sources(
-					{
-						-- { name = "copilot" },
-						{ name = "nvim_lsp" },
-						{ name = "luasnip" },
-						{ name = "path" },
-					},
-					{
-						{ name = "buffer" },
-					},
-					{
-						{ name = "crates" },
-					}
-				),
+				sources = cmp.config.sources({
+					-- { name = "copilot" },
+					{ name = "nvim_lsp" },
+					{ name = "luasnip" },
+					{ name = "path" },
+				}, {
+					{ name = "buffer" },
+				}, {
+					{ name = "crates" },
+				}),
 				formatting = {
 					format = function(_, item)
 						local icons = require("lazyvim.config").icons.kinds
@@ -115,7 +115,7 @@ return {
 						compare.kind,
 						compare.length,
 						compare.order,
-					}
+					},
 				},
 			}
 		end,
