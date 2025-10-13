@@ -60,6 +60,8 @@ return {
 		},
 		ft = { "java" },
 		opts = function()
+			-- local jdtls_jar = vim.fn.glob("$MASON/share/jdtls/plugins/org.eclipse.equinox.launcher.jar", false, true)
+				 --cmd = { "jenv", "exec", "java", "-jar", jdtls_jar },
 			return {
 				-- How to find the root dir for a given filename. The default comes from
 				-- lspconfig which provides a function specifically for java projects.
@@ -91,37 +93,32 @@ return {
 							opts.jdtls_workspace_dir(project_name),
 						})
 					end
+					print(cmd)
 					return cmd
 				end,
 				dap = { hotcodereplace = "auto", config_overrides = {} },
+				dep_main = {},
+				settings = {
+					java = {
+						inlayHints = {
+							parameterNames = {
+								enabled = "all",
+							},
+						},
+					},
+				},
 			}
 		end,
 		config = function()
 			local opts = Util.opts("nvim-jdtls") or {}
 
 			-- Find the extra bundles that should be passed on the jdtls command-line
-			-- if nvim-dap is enabled with java debug/test.
-			local mason_registry = require("mason-registry")
 			local bundles = {} ---@type string[]
 
-			local java_dbg_pkg = mason_registry.get_package("java-debug-adapter")
-			local java_dbg_path = java_dbg_pkg:get_install_path()
-			local jar_patterns = {
-				java_dbg_path .. "/extension/server/com.microsoft.java.debug.plugin-*.jar",
-			}
-
-			-- java-test also depends on java-debug-adapter.
-			local java_test_pkg = mason_registry.get_package("java-test")
-			local java_test_path = java_test_pkg:get_install_path()
-			vim.list_extend(jar_patterns, {
-				java_test_path .. "/extension/server/*.jar",
-			})
-
-			for _, jar_pattern in ipairs(jar_patterns) do
-				for _, bundle in ipairs(vim.split(vim.fn.glob(jar_pattern), "\n")) do
-					table.insert(bundles, bundle)
-				end
-			end
+			-- Somehow jdtls isn't able to get config info from it.
+			-- Might be java version issue, maybe jenv isn't working well with mason?
+			-- bundles = vim.fn.glob("$MASON/share/java-debug-adapter/com.microsoft.java.debug.plugin-*jar", false, true)
+			-- vim.list_extend(bundles, vim.fn.glob("$MASON/share/java-test/*.jar", false, true))
 
 			local function attach_jdtls()
 				local fname = vim.api.nvim_buf_get_name(0)
@@ -133,6 +130,7 @@ return {
 					init_options = {
 						bundles = bundles,
 					},
+					settings = opts.settings,
 					-- enable CMP capabilities
 					capabilities = require("cmp_nvim_lsp").default_capabilities(),
 				}, opts.jdtls)
@@ -158,43 +156,52 @@ return {
 					local client = vim.lsp.get_client_by_id(args.data.client_id)
 					if client and client.name == "jdtls" then
 						local wk = require("which-key")
-						wk.register({
-							["<leader>cx"] = { name = "+extract" },
-							["<leader>cxv"] = { require("jdtls").extract_variable_all, "Extract Variable" },
-							["<leader>cxc"] = { require("jdtls").extract_constant, "Extract Constant" },
-							["gs"] = { require("jdtls").super_implementation, "Goto Super" },
-							["gS"] = { require("jdtls.tests").goto_subjects, "Goto Subjects" },
-							["<leader>co"] = { require("jdtls").organize_imports, "Organize Imports" },
-						}, { mode = "n", buffer = args.buf })
-						wk.register({
-							["<leader>c"] = { name = "+code" },
-							["<leader>cx"] = { name = "+extract" },
-							["<leader>cxm"] = {
-								[[<ESC><CMD>lua require('jdtls').extract_method(true)<CR>]],
-								"Extract Method",
+						wk.add({
+							mode = "n",
+							buffer = args.buf,
+							{ "<leader>cx",  group = "extract" },
+							{ "<leader>cxv", function() require("jdtls").extract_variable_all() end, desc = "Extract Variable" },
+							{ "<leader>cxc", function() require("jdtls").extract_constant() end,     desc = "Extract Constant" },
+							{ "gs",          function() require("jdtls").super_implementation() end, desc = "Goto Super" },
+							{ "gS",          function() require("jdtls.tests").goto_subjects() end,  desc = "Goto Subjects" },
+							{ "<leader>co",  function() require("jdtls").organize_imports() end,     desc = "Organize Imports" },
+						})
+						wk.add({
+							mode = "v",
+							buffer = args.buf,
+							{ "<leader>c",  group = "code" },
+							{ "<leader>cx", group = "extract" },
+							{
+								"<leader>cxm",
+								"<ESC><CMD>lua require('jdtls').extract_method(true)<CR>",
+								desc = "Extract Method",
 							},
-							["<leader>cxv"] = {
-								[[<ESC><CMD>lua require('jdtls').extract_variable_all(true)<CR>]],
-								"Extract Variable",
+							{
+								"<leader>cxv",
+								"<ESC><CMD>lua require('jdtls').extract_variable_all(true)<CR>",
+								desc = "Extract Variable",
 							},
-							["<leader>cxc"] = {
-								[[<ESC><CMD>lua require('jdtls').extract_constant(true)<CR>]],
-								"Extract Constant",
+							{
+								"<leader>cxc",
+								"<ESC><CMD>lua require('jdtls').extract_constant(true)<CR>",
+								desc = "Extract Constant",
 							},
-						}, { mode = "v", buffer = args.buf })
+						})
 
 						-- custom init for Java debugger
 						require("jdtls").setup_dap(opts.dap)
-						require("jdtls.dap").setup_dap_main_class_configs()
+						require("jdtls.dap").setup_dap_main_class_configs(opts.dap_main)
 
 						-- Java Test require Java debugger to work
 						-- custom keymaps for Java test runner (not yet compatible with neotest)
-						wk.register({
-							["<leader>t"] = { name = "+test" },
-							["<leader>tt"] = { require("jdtls.dap").test_class, "Run All Test" },
-							["<leader>tr"] = { require("jdtls.dap").test_nearest_method, "Run Nearest Test" },
-							["<leader>tT"] = { require("jdtls.dap").pick_test, "Run Test" },
-						}, { mode = "n", buffer = args.buf })
+						wk.add({
+							mode = "n",
+							buffer = args.buf,
+							{ "<leader>t",  group = "test" },
+							{ "<leader>tt", function() require("jdtls.dap").test_class() end,          desc = "Run All Test" },
+							{ "<leader>tr", function() require("jdtls.dap").test_nearest_method() end, desc = "Run Nearest Test" },
+							{ "<leader>tT", function() require("jdtls.dap").pick_test() end,           desc = "Run Test" },
+						})
 
 						-- User can set additional keymaps in opts.on_attach
 						if opts.on_attach then
