@@ -93,17 +93,32 @@ return {
 							opts.jdtls_workspace_dir(project_name),
 						})
 					end
-					print(cmd)
 					return cmd
 				end,
 				dap = { hotcodereplace = "auto", config_overrides = {} },
 				dep_main = {},
 				settings = {
 					java = {
+						configuration = {
+							runtimes = {
+								{
+									name = "OpenJDK 21",
+									path = "/usr/lib/jvm/java-21-openjdk/",
+									default = true,
+								},
+								{
+									name = "OpenJDK 25",
+									path = "/usr/lib/jvm/java-25-openjdk/",
+								},
+							},
+						},
 						inlayHints = {
 							parameterNames = {
 								enabled = "all",
 							},
+						},
+						maven = {
+							downloadSources = true,
 						},
 					},
 				},
@@ -129,6 +144,7 @@ return {
 					root_dir = opts.root_dir(fname),
 					init_options = {
 						bundles = bundles,
+						extendedClientCapabilities = require("jdtls.capabilities")
 					},
 					settings = opts.settings,
 					-- enable CMP capabilities
