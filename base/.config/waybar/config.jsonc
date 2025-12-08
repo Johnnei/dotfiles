@@ -20,6 +20,7 @@
         "idle_inhibitor",
         "pulseaudio",
         "cpu",
+        "custom/gpu-usage",
         "memory",
         "keyboard-state",
         "sway/language",
@@ -208,5 +209,12 @@
 			"suspend": "systemctl suspend",
 			"hibernate": "systemctl hibernate"
 		}
+    },
+    "custom/gpu-usage": {
+      "format": "{} {icon}",
+      "exec": "gpu-usage-waybar",
+      "return-type": "json",
+      "format-icons": "󰾲",
+      "on-click": "ghostty -e nvtop"
     }
 }
