@@ -1,2 +1,3 @@
 .config/zsh/config.d/*.zsh
+.config/nvim/lua/plugins/z*.lua
 !.config/zsh/config.d/kubernetes.zsh
