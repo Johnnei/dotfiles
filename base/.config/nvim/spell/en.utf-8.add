@@ -3,3 +3,14 @@ Hocon
 hocon
 AST
 refactor
+Netbox
+pacman
+netbox
+nginx
+ansible
+src
+dest
+rw
+py
+conf
+systemd
