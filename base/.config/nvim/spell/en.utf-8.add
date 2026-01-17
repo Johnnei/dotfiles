@@ -14,3 +14,11 @@ rw
 py
 conf
 systemd
+yaml
+config
+tmpfs
+tmp
+mnt
+nvr
+localtime
+ip

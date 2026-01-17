@@ -18,6 +18,7 @@
 
 [merge]
 	ff = false
+	tool = nvimdiff
 [push]
 	default = simple
 [pull]
@@ -28,7 +29,13 @@
 [diff]
 	wsErrorHightlight = new,old
 
-# Mergetool configuration
+[mergetool "nvimdiff"]
+	layout = LOCAL,BASE,REMOTE / MERGED
+
+[mergetool]
+	prompt = false
+	keepBackup = false
+	hideResolved = true
 
 [filter "lfs"]
 	clean = git-lfs clean -- %f

@@ -43,6 +43,7 @@ return {
 					},
 					always_show = {
 						".gitlab",
+						".github",
 						".gitignore",
 						".gitlab-ci.yml",
 						".config",
