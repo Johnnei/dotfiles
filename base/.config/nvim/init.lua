@@ -48,6 +48,12 @@ require("lazy").setup("plugins")
 
 vim.cmd.colorscheme "catppuccin"
 
+-- Make spelling not look like LSP errors
+vim.api.nvim_set_hl(0, "SpellBad", { sp = "#A6E3A1", undercurl = true })
+vim.api.nvim_set_hl(0, "SpellCap", { sp = "#A6E3A1", undercurl = true })
+vim.api.nvim_set_hl(0, "SpellLocal", { sp = "#A6E3A1", undercurl = true })
+vim.api.nvim_set_hl(0, "SpellRare", { sp = "#A6E3A1", undercurl = true })
+
 -- Global mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)

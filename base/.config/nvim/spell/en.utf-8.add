@@ -22,3 +22,9 @@ mnt
 nvr
 localtime
 ip
+gid
+uid
+nfs
+utils
+sha1
+url
