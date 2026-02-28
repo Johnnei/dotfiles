@@ -28,3 +28,4 @@ nfs
 utils
 sha1
 url
+rsync

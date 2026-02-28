@@ -93,6 +93,9 @@ path+=( $GOPATH/bin )
 path+=( $HOME/.jenv/bin )
 eval "$(jenv init -)"
 
+# Not-so-arch-bins
+path+=( $HOME/.local/bin )
+
 # Export to sub process
 export PATH
 
