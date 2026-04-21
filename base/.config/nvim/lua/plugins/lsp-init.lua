@@ -239,6 +239,8 @@ return {
 	{
 		-- AST based highlghting
 		"nvim-treesitter/nvim-treesitter",
+		branch = "main",
+		lazy = false,
 		build = ":TSUpdate",
 		cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
 		opts = {
@@ -266,7 +268,7 @@ return {
 			},
 		},
 		config = function(self, opts)
-			require("nvim-treesitter.configs").setup(opts)
+			require("nvim-treesitter.config").setup(opts)
 		end
 	},
 	{
