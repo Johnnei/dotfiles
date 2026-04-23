@@ -93,6 +93,9 @@ path+=( $GOPATH/bin )
 path+=( $HOME/.jenv/bin )
 eval "$(jenv init -)"
 
+# Cargo
+path+=( $HOME/.cargo/bin )
+
 # Not-so-arch-bins
 path+=( $HOME/.local/bin )
 
