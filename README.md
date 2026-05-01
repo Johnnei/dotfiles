@@ -8,7 +8,7 @@ Install the following tools:
 
 Arch:
 ```bash
-sudo pacman -S --needed noto-fonts noto-fonts-emoji ttf-jetbrains-mono-nerd ripgrep cargo-nextest stow hyprland archlinux-xdg-menu
+sudo pacman -S --needed noto-fonts noto-fonts-cjk noto-fonts-emoji ttf-jetbrains-mono-nerd ripgrep cargo-nextest stow hyprland archlinux-xdg-menu
 ```
 
 MacOS:

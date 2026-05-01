@@ -1,9 +1,5 @@
 return {
   {
-    "nvim-treesitter/nvim-treesitter",
-    opts = { ensure_installed = { "haskell" } },
-  },
-  {
     "neovim/nvim-lspconfig",
     opts = {
       setup = {

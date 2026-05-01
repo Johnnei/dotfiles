@@ -35,7 +35,7 @@ return {
 		"folke/neodev.nvim",
 		lazy = true,
 		dependencies = {
-				"rcarriga/nvim-dap-ui",
+			"rcarriga/nvim-dap-ui",
 		},
 		opts = {
 			library = {
@@ -80,7 +80,7 @@ return {
 							},
 						},
 					},
-						-- lazy-load schemastore when needed
+					-- lazy-load schemastore when needed
 					on_new_config = function(new_config)
 						new_config.settings.yaml.schemas = vim.tbl_deep_extend(
 							"force",
@@ -118,13 +118,13 @@ return {
 			},
 			---@type table<string, fun(server:string, opts:_.lspconfig.options):boolean?>
 			setup = {
-					yamlls = function()
+				yamlls = function()
 					require("lazyvim.util").lsp.on_attach(function(client, _)
 						if client.name == "yamlls" then
 							client.server_capabilities.documentFormattingProvider = true
 						end
 					end)
-			end,
+				end,
 			},
 		},
 		config = function(self, opts)
@@ -142,13 +142,13 @@ return {
 				local telescope = require('telescope.builtin')
 
 				local keys = {
-					{ 'gd', telescope.lsp_definitions, desc = "Goto Definition" },
-					{ 'gD', vim.lsp.buf.declaration, desc = "Goto Declaration" },
-					{ 'K', function() return vim.lsp.buf.hover() end, desc = "Hover" },
-					{ 'gi', telescope.lsp_implementations, desc = "Goto Implementation" },
-					{ 'gK', function() return vim.lsp.buf.signature_help() end, desc = "Signature Help", has = "signatureHelp" },
-					{ "<c-k>", function() return vim.lsp.buf.signature_help() end, mode = "i", desc = "Signature Help", has = "signatureHelp" },
-					{ 'gy', vim.lsp.buf.type_definition, desc = "Type Definition" },
+					{ 'gd',    telescope.lsp_definitions,                          desc = "Goto Definition" },
+					{ 'gD',    vim.lsp.buf.declaration,                            desc = "Goto Declaration" },
+					{ 'K',     function() return vim.lsp.buf.hover() end,          desc = "Hover" },
+					{ 'gi',    telescope.lsp_implementations,                      desc = "Goto Implementation" },
+					{ 'gK',    function() return vim.lsp.buf.signature_help() end, desc = "Signature Help",     has = "signatureHelp" },
+					{ "<c-k>", function() return vim.lsp.buf.signature_help() end, mode = "i",                  desc = "Signature Help", has = "signatureHelp" },
+					{ 'gy',    vim.lsp.buf.type_definition,                        desc = "Type Definition" },
 					{
 						'<leader>cr',
 						function()
@@ -157,10 +157,10 @@ return {
 						desc = "Rename",
 						expr = true,
 					},
-					{ '<leader>ca', vim.lsp.buf.code_action, mode = { 'n', 'v' }, desc = "Code Action" },
-					{ "<leader>cc", vim.lsp.codelens.run, desc = "Run Codelens", mode = { "n", "v" }, has = "codeLens" },
-					{ "<leader>cC", vim.lsp.codelens.refresh, desc = "Refresh & Display Codelens", mode = { "n" }, has = "codeLens" },
-					{ 'gr', telescope.lsp_references, desc = "Goto Reference" },
+					{ '<leader>ca', vim.lsp.buf.code_action,  mode = { 'n', 'v' },                 desc = "Code Action" },
+					{ "<leader>cc", vim.lsp.codelens.run,     desc = "Run Codelens",               mode = { "n", "v" }, has = "codeLens" },
+					{ "<leader>cC", vim.lsp.codelens.refresh, desc = "Refresh & Display Codelens", mode = { "n" },      has = "codeLens" },
+					{ 'gr',         telescope.lsp_references, desc = "Goto Reference" },
 					{
 						'<leader>cf',
 						function()
@@ -243,30 +243,61 @@ return {
 		lazy = false,
 		build = ":TSUpdate",
 		cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
-		opts = {
-			highlight = {
-				enable = true,
-			},
-			indent = {
-				enable = true,
-			},
-			ensure_installed = {
+		init = function()
+			local ensure_installed = {
+				-- C
+				"c", "cpp",
+				-- Go
+				"go", "gomod", "gowork", "gosum",
+				-- Lua
 				"lua",
+				-- Rust
 				"rust",
 				"ron",
+				-- Config files
 				"toml",
-				"haskell",
+				"json",
 				"yaml",
+				-- FP
+				"haskell",
+				"ocaml",
+				-- Vim
 				"vim",
 				"vimdoc",
-				"regex",
+				-- Shell
 				"bash",
+				-- Regex
+				"regex",
+				-- Markdown
 				"markdown",
 				"markdown_inline",
-				"json",
+				-- JVM 
+				"java",
 				"scala",
-			},
-		},
+				"kotlin",
+				-- PHP
+				"php",
+				-- Python
+				"ninja",
+				"rst",
+			}
+			local already_installed = require('nvim-treesitter.config').get_installed()
+			local to_install = vim.iter(ensure_installed)
+					:filter(function(parser)
+						return not vim.tbl_contains(already_installed, parser)
+					end)
+					:totable()
+			require('nvim-treesitter').install(to_install)
+
+			vim.api.nvim_create_autocmd('FileType', {
+				callback = function()
+					-- Enable treesitter highlighting and disable regex syntax
+					pcall(vim.treesitter.start)
+					-- Enable treesitter-based indentation
+					vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+				end,
+			})
+		end,
 		config = function(self, opts)
 			require("nvim-treesitter.config").setup(opts)
 		end
