@@ -31,3 +31,6 @@ metals.sbt
 # Ansible Secrets
 vault_access
 .ansible/
+
+# LLM Crap
+settings.local.json

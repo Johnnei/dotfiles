@@ -25,7 +25,6 @@
 	ff = only
 [core]
 	eol = lf
-	excludesfile = ~/.gitglobalignore
 [diff]
 	wsErrorHightlight = new,old
 
