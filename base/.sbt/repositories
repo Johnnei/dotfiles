@@ -1,0 +1,3 @@
+[repositories]
+local
+maven-proxy: https://nexus.johnnei.org/repository/maven-proxy/
