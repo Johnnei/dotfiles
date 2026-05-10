@@ -22,6 +22,13 @@ brew install cargo-nextest
 ## Stow it
 
 ```bash
-stow .
+# If using company devices, only base is common across all my setups
+stow base
+
+# Configure off-work identity and networking settings
+stow personal
+
+# Enable device specific configuration
+stow <bkk/ayu>
 ```
 
