@@ -232,7 +232,8 @@ return {
 			{ "<leader>gb",  "<cmd>Git blame<cr>", desc = "blame" },
 			{ "<leader>gs",  "<cmd>Git st<cr>",    desc = "status" },
 			{ "<leader>gca", "<cmd>Git ca<cr>",    desc = "commit -a" },
-			{ "<leader>gl",  "<cmd>Git log<cr>",   desc = "log" },
+			{ "<leader>gL",  "<cmd>Git log<cr>",   desc = "log (all)" },
+			{ "<leader>gl",  "<cmd>Git log -- %<cr>",   desc = "log (file)" },
 		},
 	},
 	-- Link to Gitlab
