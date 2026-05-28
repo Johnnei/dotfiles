@@ -4,9 +4,9 @@ hl.monitor({
 	position = "auto-right",
 	scale = 1,
 	bitdepth = 10,
-  cm = "hdr",
-  sdrbrightness = 1.2,
-  sdrsaturation = 0.98,
+	cm = "hdr",
+	sdrbrightness = 1.2,
+	sdrsaturation = 0.98,
 })
 
 hl.monitor({
@@ -15,7 +15,7 @@ hl.monitor({
 	position = "auto-left",
 	scale = 1,
 	bitdepth = 10,
-  cm = "hdr",
-  sdrbrightness = 1.2,
-  sdrsaturation = 0.98,
+	cm = "hdr",
+	sdrbrightness = 1.2,
+	sdrsaturation = 0.98,
 })
