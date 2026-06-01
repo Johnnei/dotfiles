@@ -3,10 +3,10 @@ hl.monitor({
 	mode = "2560x1440@200",
 	position = "auto-right",
 	scale = 1,
-	bitdepth = 10,
-	cm = "hdr",
-	sdrbrightness = 1.2,
-	sdrsaturation = 0.98,
+	-- bitdepth = 10,
+	-- cm = "hdr",
+	-- sdrbrightness = 1.2,
+	-- sdrsaturation = 0.98,
 })
 
 hl.monitor({
@@ -14,8 +14,8 @@ hl.monitor({
 	mode = "2560x1440@200",
 	position = "auto-left",
 	scale = 1,
-	bitdepth = 10,
-	cm = "hdr",
-	sdrbrightness = 1.2,
-	sdrsaturation = 0.98,
+	-- bitdepth = 10,
+	-- cm = "hdr",
+	-- sdrbrightness = 1.2,
+	-- sdrsaturation = 0.98,
 })
