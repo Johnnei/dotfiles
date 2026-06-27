@@ -10,21 +10,6 @@ return {
 			"nvim-treesitter/nvim-treesitter",
 		},
 	},
-	-- GitHub Copilot for CodeCompanion
-	{
-		"zbirenbaum/copilot.lua",
-		cmd = "Copilot",
-		build = ":Copilot auth",
-		lazy = true,
-		opts = {
-			suggestions = { enabled = false },
-			panel = { enabled = false },
-			filetypes = {
-				markdown = true,
-				help = true
-			}
-		}
-	},
 	{
 		"echasnovski/mini.diff",
 		config = function()
