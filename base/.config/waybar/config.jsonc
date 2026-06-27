@@ -22,8 +22,6 @@
         "cpu",
         "custom/gpu-usage",
         "memory",
-        "keyboard-state",
-        "sway/language",
         "clock",
         "tray"
     ],

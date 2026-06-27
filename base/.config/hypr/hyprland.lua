@@ -78,9 +78,11 @@ hl.env("ELECTRON_OZONE_PLATFORM_HINT", "auto")
 --   },
 -- })
 
-hl.permission("/usr/(bin|local/bin)/grim", "screencopy", "allow")
--- hl.permission("/usr/(lib|libexec|lib64)/xdg-desktop-portal-hyprland", "screencopy", "allow")
--- hl.permission("/usr/(bin|local/bin)/hyprpm", "plugin", "allow")
+hl.permission({
+	binary = "/usr/(bin|local/bin)/grim",
+	type = "screencopy",
+	mode = "allow",
+})
 
 
 -----------------------
@@ -228,6 +230,7 @@ hl.config({
         kb_model   = "",
         kb_options = "",
         kb_rules   = "",
+        numlock_by_default = true,
 
         follow_mouse = 2,
 
