@@ -27,6 +27,7 @@ local menu        = "hyprlauncher"
 
 hl.on("hyprland.start", function ()
   hl.exec_cmd("/usr/lib/pam_kwallet_init &")
+  hl.exec_cmd("snixembed")
   hl.exec_cmd(menu .. "-d &")
   hl.exec_cmd("keepassxc", { workspace = "5 silent" })
   hl.exec_cmd(terminal, { workspace = "2 silent" })
