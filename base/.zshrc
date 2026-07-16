@@ -81,6 +81,9 @@ for conf in "$HOME/.config/zsh/config.d/"*.zsh; do
   source "${conf}"
 done
 
+# ripgrip
+export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/config"
+
 # Use neovim as default editor
 export EDITOR=nvim
 export VISUAL=nvim

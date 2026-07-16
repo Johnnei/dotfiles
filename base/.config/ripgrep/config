@@ -1,0 +1,9 @@
+# Always use smart case (case-insensitive unless pattern has uppercase)
+--smart-case
+
+# Search hidden files and directories (.gitignore rules still apply)
+--hidden
+
+# Exclude specific folders globally
+--glob=!.git/
+--glob=!node_modules/
